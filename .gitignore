@@ -1,0 +1,23 @@
+## Core tex auxiliary files:
+*.aux
+*.log
+*.toc
+*.pdf
+*~
+
+## Documents:
+*.pdf
+
+## 'auto' folder when using emacs and auctex
+./auto/*
+*.el
+
+./apariencia/*.aux
+./apariencia/*~
+./apariencia/auto/*
+
+./text/*.aux
+./text/*.log
+./text/*~
+./text/auto/*
+
