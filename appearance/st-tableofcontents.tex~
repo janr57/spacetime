@@ -1,0 +1,14 @@
+% st-tablacontenidos.tex
+% Tabla de contenidos.
+%
+% Copyright (C) 2020 José A. Navarro Ramón <josea.navarro1@gmail.com>
+%
+
+\tableofcontents
+
+%%% Local Variables:
+%%% coding: utf-8
+%%% mode: latex
+%%% TeX-engine: luatex
+%%% TeX-master: "../spacetime.tex"
+%%% End:

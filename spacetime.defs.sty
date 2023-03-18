@@ -1,0 +1,315 @@
+% spacetime.defs.sty
+%
+% Copyright (C) 2020 José A. Navarro Ramón <josea.navarro1@gmail.com>
+%
+%% ----------------------------------------------------------------------------
+
+% ----------------------------------------------------------------------------
+% COLOURS
+\pgfplotsset{
+  colormap={greenyellow}{rgb255(0cm)=(0,128,0); rgb255(1cm)=(255,255,0)}
+}
+
+\pgfplotsset{
+  colormap={janrGRAYWHITE}{rgb255(0cm)=(180,180,180); rgb255(1cm)=(255,255,255)}
+}
+
+\pgfplotsset{
+  colormap = {GY}{%
+    color=(green!40!black)
+    color=(green!70!black)
+    color=(green!20!yellow)
+  },
+  colormap = {G}{%
+    color=(green!70!black)
+    color=(green!70!black)
+  },
+}
+
+% Red color in text or math, signaling an error
+\newcommand{\errcolor}{red!80!black}
+% Green color in text or math highlighting it
+\newcommand{\infocolor}{green!55!black}
+% Green color in text for images
+\newcommand{\greentext}{green!50!black}
+% Yellow color for image backaground
+\newcommand{\bgcolor}{yellow!20}
+% Grey border for image background
+\newcommand{\bgbordercolor}{black!10}
+% Watermark
+\newcommand{\watermark}{black!9}
+
+% ----------------------------------------------------------------------------
+% GROSOR DE LÍNEA DE BORDE DE FONDO DE IMAGEN
+\newcommand{\bgborderwidth}{1pt}
+
+% ----------------------------------------------------------------------------
+% PERMITE PONER PUNTA DE FLECHA EN UN plot
+\tikzset{
+    set arrow inside/.code={\pgfqkeys{/tikz/arrow inside}{#1}},
+    set arrow inside={end/.initial=>, opt/.initial=},
+    /pgf/decoration/Mark/.style={
+      mark/.expanded=at position #1 with
+        {
+          \noexpand\arrow[\pgfkeysvalueof{/tikz/arrow inside/opt}]{\pgfkeysvalueof{/tikz/arrow inside/end}}
+        }
+    },
+    arrow inside/.style 2 args={
+        set arrow inside={#1},
+        postaction={
+            decorate,decoration={
+                markings,Mark/.list={#2}
+            }
+        }
+    },
+}
+
+% ----------------------------------------------------------------------------
+% CANCELACIÓN TÉRMINOS EN FÓRMULAS
+\newcommand{\cancelout}[1]{%
+  \tikz[baseline=(tocancel.base)]{%
+    \node[inner sep=1pt,outer sep=0pt] (tocancel) {$#1$}; \draw[red]
+    (tocancel.south west) -- (tocancel.north east); } }
+
+% ----------------------------------------------------------------------------
+
+% ----------------------------------------------------------------------------
+% MARCAS DE AGUA
+\SetWatermarkText{\textsf{BORRADOR}}
+\SetWatermarkScale{1}
+\SetWatermarkColor{\marcaagua}
+\SetWatermarkAngle{55}
+
+% ----------------------------------------------------------------------------
+
+
+%% ---------------------------------------------------------------------------
+% Longitudes
+% Para desplazamiento de subíndice en elementos de matrices en relatividad
+\newcommand{\ksub}{\kern4pt}
+
+% ----------------------------------------------------------------------------
+% Paquete 'tensind'
+\tensordelimiter{€}
+
+%% ----------- MACROS --------------------------------------------------------
+% Vectores
+\newcommand*{\vvv}[1]{%
+  % Actívese sólo una de las dos opciones
+  %\ensuremath{\vec{#1}}
+  %\ensuremath{\kern1.2pt\mathbf{#1}}
+  \ensuremath{\kern1.2pt\symbf{#1}}
+}
+
+% Matrices
+\newcommand*{\mmm}[1]{%
+  % Actívese sólo una de las dos opciones
+  %\ensuremath{\operatorname{#1}}
+  %\ensuremath{\kern1.2pt\mathbf{#1}}
+  \ensuremath{\kern1.2pt\symbf{#1}}
+}
+
+% Matrices representadas por letras griegas
+\newcommand*{\mmmg}[1]{%
+  % Actívese sólo una de las dos opciones
+  %\ensuremath{#1}
+  %\ensuremath{{\kern1.2pt\boldsymbol{#1}}}
+  \ensuremath{{\kern1.2pt\symbf{#1}}}
+}
+
+% Producto vectorial
+\newcommand{\prodvec}{%
+  % Actívese sólo una de las dos opciones
+  %\ensuremath{\wedge}
+  \ensuremath{\times}
+}
+
+\newcommand{\transp}{%
+  \ensuremath{{\top}}
+}
+
+\newcommand{\trasp}{%
+  \ensuremath{{\top}}
+}
+
+% Tensores
+\newcommand*{\ttt}[1]{%
+  % Actívese sólo una de las dos opciones
+  %\ensuremath{#1}
+  %\ensuremath{{\kern1.2pt\boldsymbol{#1}}}
+  \ensuremath{{\kern1.2pt\overbar{\symbf{#1}}}}
+}
+
+\newcommand{\xhat}[1]{%
+  % Actívese sólo una de las dos opciones
+  %\ensuremath{\kern5.2pt\pmb{{\kern-0.5em\hat{\mathrm{#1}}}}}
+  %\ensuremath{\kern1.2pt\pmb{\hat{#1}}}
+  \ensuremath{\kern1.2pt\symbf{\hat{#1}}}
+}
+
+%\xhat{\pmb{\mathrm{n}}}
+%% --------------------------------------------------------------------
+
+%% --------------------------------------------------------------------
+% Permite símbolos matemáticos en \chapter, \section, \subsection, etc.
+%\newcommand*\mathinhead[2]{\texorpdfstring{$\boldsymbol{#1}$}{#2}}
+\newcommand*\mathinhead[2]{\texorpdfstring{$\symbf{#1}$}{#2}}
+%% --------------------------------------------------------------------
+
+
+%% ----------- MACROS --------------------------------------------------------
+%% TORUS
+%% USE: \pic{torus={R}{r}{angle}}
+\tikzset{%
+  pics/torus/.style n args={3}{%
+    code = {%
+      \providecolor{pgffillcolor}{rgb}{1,1,1}
+    \begin{scope}[%
+      yscale=cos(#3),
+      outer torus/.style={draw,line width/.expanded={\the\dimexpr2\pgflinewidth+#2*2},line join=round},
+      inner torus/.style={draw=pgffillcolor,line width={#2*2}}
+      ]
+      \draw[outer torus] circle(#1);
+      \draw[inner torus] circle(#1);
+      \draw[outer torus] (180:#1) arc (180:360:#1);
+      \draw[inner torus,line cap=round] (180:#1) arc (180:360:#1);
+    \end{scope}
+  }
+}
+}
+
+%% MAP ARROW
+%\newcommand*{\mappic}[6]{%
+%  \begin{tikzpicture}
+%    % U
+%    \node[name=V]{#1};
+%    % arrow 1
+%    \node[name=arrow,right=#2 of V] {$\longrightarrow$};
+%    \node[above] at (arrow) {\footnotesize #3};
+%    \node[below] at (arrow) {\footnotesize #4};
+%    % V
+%    \node[name=W,right=#5 of arrow]{#6};
+%  \end{tikzpicture}
+%}
+
+% IRREGULAR OPEN SET
+\tikzset{%
+  pics/set01/.style={%
+    code= {%
+      \begin{scope}[x=1mm,y=1mm,xscale=.1,yscale=-.1]
+        \filldraw
+        (84.88,131.11) .. controls (105.27,98.89) and (176.5,59) .. (259.5,109) .. controls (342.5,159)
+        and (349.88,214.11) .. (310.88,254.11) .. controls (271.88,294.11)
+        and (205.5,283.33) .. (141.5,278.33) .. controls (77.5,273.33)
+        and (127.5,267.33) .. (85.5,234.33) .. controls (43.5,201.33) and (64.5,163.33) .. (84.88,131.11)
+        -- cycle;
+      \end{scope}
+    }
+  }
+}
+
+% *****************************************************************************
+\directlua{dofile "code/3Drotations.lua"}
+
+% CALCULA PLANO TANGENTE A PARTIR DE COORDENADAS CARTESIANAS DEL PTO TANGENCIA
+% lua (01a): function sphereTanPlane(vector, alpha, s1, s2)
+% Parámetros
+% #1: Punto de tangencia (x,y,z)
+% #2: Ángulo de giro de la base de vectores del plano tangente original
+% #3: factor de escala del vector 1 de la base
+% #4: factor de escala del vector 2 de la base
+%
+%\newcommand*{\tanPlane}[4]{%
+%  \directlua{tex.write(
+%    sphereTanPlane(#1, #2, #3, #4))}
+%}
+
+
+% CALCULA PLANO TANGENTE A PARTIR DE COORDENADAS ESFÉRICAS DEL PTO DE TANGENCIA
+% lua (01b): function sphereTangPlaneSph(r, theta, phi, alpha, s1, s2)
+% Parámetros
+% #1: Punto de tangencia, coord esférica -> r
+% #2: Punto de tangencia, coord esférica -> theta
+% #3: Punto de tangencia, coord esférica -> phi
+% #4: Ángulo de giro de la base de vectores del plano tangente original
+% #5: factor de escala del vector 1 de la base
+% #6: factor de escala del vector 2 de la base
+%
+\newcommand*{\tanPlaneSph}[6]{%
+  \directlua{tex.write(
+    sphereTanPlaneSph(#1, #2, #3, #4, #5, #6))}
+}
+
+% lua (02a): function vectorAtPoint(p, v, s)
+%
+%\newcommand*{\vectorPath}[3]{%
+%  \directlua{tex.write(
+%    vectorAtPoint(#1, #2, #3))}
+%}
+
+%  lua (02b): function vectorAtPointSph(r, theta, phi, v, s)
+%
+%\newcommand*{\vectorSphPath}[5]{%
+%  \directlua{tex.write(
+%    vectorAtPointSph(#1, #2, #3, #4, #5))}
+%}
+
+%  lua (03a): function sphereNormalVectorAtPoint(p, s)
+%
+%\newcommand*{\normalVectorPath}[2]{%
+%  \directlua{tex.write(
+%    sphereNormalVectorAtPoint(#1, #2))}
+%}
+
+%  lua (03b): function sphereNormalVectorAtPointSph(r, theta, phi, s)
+%
+%\newcommand*{\normalVectorPathSph}[4]{%
+%  \directlua{tex.write(
+%    sphereNormalVectorAtPointSph(#1, #2, #3, #4))}
+%}
+
+%  lua (04a): function sphereVectorAtTanPlane(p, v, alpha, s)
+%
+%\newcommand*{\vectorAtTanPlanePath}[4]{%
+%  \directlua{tex.write(
+%   sphereVectorAtTanPlane(#1, #2, #3, #4))}
+%}
+
+% lua (04b): function sphereVectorAtPointSph(r, theta, phi, v, s)
+%
+\newcommand*{\vectorAtTanPlaneSphPath}[6]{%
+  \directlua{tex.write(
+   sphereVectorAtTanPlaneSph(#1, #2, #3, #4, #5, #6))}
+}
+
+%% lua (05a): function point(p)
+%
+%\newcommand*{\pointPath}[1]{%
+%  \directlua{tex.write(
+%   point(#1))}
+%}
+
+%  lua (05b): function pointSph(r, theta, phi)
+%
+\newcommand*{\pointSphPath}[3]{%
+  \directlua{tex.write(
+   pointSph(#1, #2, #3))}
+}
+
+%  lua (06a): function radialVectorAtPointSph(r, theta, phi, s)
+%
+\newcommand*{\radialVectorAtPointSphPath}[4]{%
+  \directlua{tex.write(
+   radialVectorAtPointSph(#1, #2, #3, #4))}
+}
+
+
+
+
+%%% Local Variables:
+%%% coding: utf-8
+%%% mode: latex
+%%% TeX-engine: luatex
+%%% TeX-master: "spacetime.tex"
+%%% End:
+

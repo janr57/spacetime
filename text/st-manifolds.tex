@@ -1,0 +1,2558 @@
+% st-manifolds.tex
+%
+% Copyright (C) 2020 José A. Navarro Ramón <josea.navarro1@gmail.com>
+
+\chapter{Topological manifolds}
+
+
+\section{Introduction}
+In the last chapter we introduced topological spaces. It's a fact of life that there are so many
+that mathematicians cannot even classify them. If we take all the notions ever invented:
+regular space, sequential space, first-countable space, second-countable space, t-space,
+Hausdorff space, compact space, \dots, we will find many sets that are not homeomorphic with
+them. Ok, but that is a mathematical problem.
+
+A physical problem is that many sets that you give a topology, they resemble what we think of
+spacetime so little that they are not deemed to be useful ---at the moment--- as models for
+spacetime.
+
+But there is a very special type of topological spaces $(M,\symcal{O}_M)$ in classical spacetime
+physics, that can be charted analogously to how the surface of the Earth is charted in an atlas.
+These special types of topological spaces are called \emph{topological manifolds}.
+
+So a topological manifold is a topological space with one extra condition.
+
+
+\section{Definition of topological manifold}
+A topological space $(M,\symcal{O}_M)$ is called a d-dimensional topological manifold,
+if for every point in the set there exists an open set $U$ containing the point
+there exists a map $x$ from $U$ into a certain subset of $\symbb{R}^d$, such that
+\[
+  \forall p\in M
+  \text{, }\exists U\in\symcal{O}_M
+  \,|\, p\in U
+  \,|\, \exists x: U\subseteq M \xrightarrow{\hspace{2.0em}} x(U)\subseteq \symbb{R}^d 
+\]
+\begin{enumerate}
+\item such that $x$ is invertible ---there is a map $x^{-1}$ that goes from the image $x(U)$
+  back to $U$---.
+  \[
+    \exists x^{-1} : x(U)\subseteq M \xrightarrow{\hspace{2,8em}} U \subseteq \symbb{R}^d
+  \]
+\item $x$ is continuous (we have to take into account the topologies)
+   \vspace{-1.0ex}
+ \begin{center}
+ %\begin{figure}[ht]
+   \def\scl{1}
+   % \centering
+   \begin{tikzpicture}[%
+     scale=\scl,
+     curled/.style={%
+       green!50!black,
+       -{Stealth},
+       decorate,
+       decoration={snake,post length=4.3pt,amplitude=1.3pt,segment length=3.5pt},
+     },
+     ]
+     \node (x) at (0,0) {$x:$};
+     \node[right = .6em of x] (U) at (0,0) {$U\subseteq M$};
+     \node[right = -.4em of U] (arrow) {$\xrightarrow{\hspace{3em}}$};
+     \node[right = -.4em of arrow] (xU) {$x(U)\subseteq\symbb{R}^d$};
+     
+     \node[below right = 1.5em and -1.5em of U] (OM) {\small $\symcal{O}_M$};
+     \node[below right = 1.5em and -1.8em of xU] (ORd) {\small $\symcal{O}_{\text{std}}$};
+     
+     \draw[curled] ($(OM) + (-.2em,.6em)$) -- ++(up:2.0em);
+     \draw[curled] ($(ORd) + (-0.34em,.6em)$) -- ++(up:2.0em);
+   \end{tikzpicture}
+ \end{center}
+\item and the inverse $x^{-1}$ is also continuous (this is acomplished when we choose
+  the subset topology $\symcal{O}|_U$ for U).
+  
+  We know that if $x$ is invertible and continuous, it doesn't mean that $x^{-1}$ is also
+  continuous. But nevertheless, here we require it.
+  
+  % \end{figure}
+\end{enumerate}
+
+\subsubsection{Comments}
+\begin{itemize}
+\item The beginning of the definition means that, for every point in $M$, we can find an open
+  set $U$ in $M$. And there exist a map $x$ wich takes \emph{every point in} $P$ to a certain
+  subset of $\symbb{R}^d$.
+\item Note that, as $U$ is open and all the conditions 1, 2 and 3 apply, we know that $x(U)$ must
+  also be open.
+\end{itemize}
+
+\subsubsection{First example}
+Let's take the surface $M$ of a doughnut ($M$ is a subset of $\symbb{R}^3$). Next, we choose any
+arbitrary point $p$ on the surface. There must exist an open set $U$ which contains the point
+($p\in U$). See figure~\ref{fig:mf-torus-pU}
+\begin{figure}[ht]
+  \def\scl{1}
+  \pgfmathsetmacro{\HORIZONTAL}{2.5}
+  \pgfmathsetmacro{\VERTICAL}{1.3}
+  \centering
+  \begin{tikzpicture}[%
+    scale=\scl,
+    torus/.style={fill=black!12},
+    point/.style={fill=black,draw=black},
+    background/.style={
+      line width=\bgborderwidth,
+      draw=\bgbordercolor,
+      fill=\bgcolor,
+    },
+    ]
+    \coordinate (O) at (0,0);
+    \coordinate (M) at (1.6,.8);
+    \coordinate (btop) at (0,\VERTICAL);
+    \coordinate (bleft) at (-\HORIZONTAL,0);
+    \coordinate (bright) at (\HORIZONTAL,0);
+    \coordinate (bbottom) at (0,-\VERTICAL);
+    % TORUS
+    \pic[torus]{torus={1cm}{3.3mm}{67}};
+    % \filldraw[point] (-.4,-.35) circle[radius=.5pt]
+    % node[below right=-4pt and -1pt] {\scriptsize $p$};
+    % M
+    \node at (M) {\footnotesize $M\subset\symbb{R}^3$};
+    % 
+    % \filldraw[fill=red,draw=black] (btop) circle[radius=1pt];
+    % \filldraw[fill=red,draw=black] (bbottom) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bleft) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bright) circle[radius=1pt];
+    % \filldraw[fill opacity=0,draw=black] (O) circle[radius=2pt];    
+    % YELLOW BACKGROUND
+    \begin{scope}[on background layer]
+      \node [background, fit= (bleft) (bright) (btop) (bbottom)] {};
+    \end{scope}
+  \end{tikzpicture}
+  \hspace{2em}
+  \begin{tikzpicture}[%
+    scale=\scl,
+    torus/.style={fill=black!12},
+    open set/.style={dotted,fill=green!40,draw=black},
+    point/.style={fill=black,draw=black},
+    background/.style={
+      line width=\bgborderwidth,
+      draw=\bgbordercolor,
+      fill=\bgcolor,
+    },
+    ]
+    \coordinate (O) at (0,0);
+    \coordinate (M) at (1.6,.8);
+    \coordinate (btop) at (0,\VERTICAL);
+    \coordinate (bleft) at (-\HORIZONTAL,0);
+    \coordinate (bright) at (\HORIZONTAL,0);
+    \coordinate (bbottom) at (0,-\VERTICAL);
+    % TORUS
+    \pic[torus]{torus={1cm}{3.3mm}{67}};
+    \draw[open set,rotate=-8] (-.4,-.40) ellipse (3.8mm and 2mm)
+    node[above left=2pt and 7pt,\greentext] {\scriptsize $U$};
+    \filldraw[point] (-.4,-.35) circle[radius=.5pt]
+    node[below right=-4pt and -1pt] {\scriptsize $p$};
+    % M
+    \node at (M) {\footnotesize $M\subset\symbb{R}^3$};
+    % 
+    % YELLOW BACKGROUND
+    \begin{scope}[on background layer]
+      \node [background, fit= (bleft) (bright) (bbottom) (btop)] {};
+    \end{scope}
+  \end{tikzpicture}
+  \caption{At the left side, the surface $M$ of a torus is represented.
+    At the right side we choose \emph{any} point $p$ on $M$. For every point on $M$,
+    we find an open set $U$ which contains the point, $p\in U$.}
+  \label{fig:mf-torus-pU}
+\end{figure}
+We can find an invertible map $x$, which takes \emph{every point} in $U$ into a subset of
+$\symbb{R}^2$. Both, $x$ add $x^{-1}$ are continuous. Then, the topological space
+$(M,\symcal{O}|_M)$ is a \emph{2-topological manifold}. The pair ($U$, $x$) is called a
+\emph{chart}. See figure~\ref{fig:mf-torus-chart}.
+\begin{figure}[ht]
+  \def\scl{1}
+  \pgfmathsetmacro{\BGUP}{1.3}
+  \pgfmathsetmacro{\BGRIGHT}{2+.7}
+  \pgfmathsetmacro{\BGDOWN}{.6}
+  \pgfmathsetmacro{\BGLEFT}{.8}  
+  \pgfmathsetmacro{\XAXISLENGTH}{4}
+  \pgfmathsetmacro{\YAXISLENGTH}{3}
+  \centering
+  \begin{tikzpicture}[%
+    scale=\scl,
+    torus/.style={fill=black!12},
+    open set/.style={dotted,fill=green!40,draw=black},
+    point/.style={fill=black,draw=black},
+    map/.style={-{Latex[round]},shorten >=2pt},
+    background/.style={
+      line width=\bgborderwidth,
+      draw=\bgbordercolor,
+      fill=\bgcolor,
+    },
+    ]
+    % torus
+    \coordinate (p) at (-.4,-.35);
+    \coordinate (l) at (-.84,-.30);
+    \coordinate (r) at (-.10,-.41);
+    % M
+    \coordinate (M) at (1.6,.8);
+    % chart
+    \coordinate (chart) at (-4,-.7);
+    \coordinate (Ochart) at ($(chart)+(0,-3.3)$);
+    \coordinate (pchart) at (-2,-2.5);
+    \coordinate (lchart) at (-3.4,-2.5);
+    \coordinate (rchart) at (-.67,-3.0);
+    % 
+    \coordinate (btop) at (0,\BGUP);
+    \coordinate (bleft) at ($(Ochart)-(\BGLEFT,0)$);
+    \coordinate (bright) at (\BGRIGHT,0);
+    \coordinate (bbottom) at ($(Ochart)-(0,\BGDOWN)$);
+    % 
+    % TORUS
+    \pic[torus]{torus={1cm}{3.3mm}{67}};
+    \draw[open set,rotate=-8] (-.4,-.40) ellipse (3.8mm and 2mm);
+    \filldraw[fill=black,draw=black] (-.4,-.35) circle[radius=.5pt]
+    node[below right=-4pt and -1pt] {\scriptsize $p$};
+    \draw[open set,rotate=-8] (-.4,-.40) ellipse (3.8mm and 2mm)
+    node[above left=2pt and 7pt,\greentext] {\scriptsize $U$};
+    % CHART
+    \path (chart) pic[dotted,fill=green!40]{set01};
+    \draw[->] (Ochart) to ++(right:\XAXISLENGTH);
+    \draw[->] (Ochart) to ++(up:\YAXISLENGTH);
+    % MAP LINES
+    \draw[map] (p) to[bend right] (pchart);
+    \draw[map] (l) to[bend right] node[above=4pt] {$x$} (lchart);
+    \draw[map] (r) to[bend right] (rchart);
+    % P CHART
+    \filldraw[fill=black,draw=black] (pchart) circle[radius=.5pt]
+    node[below right=-2pt and 0pt] {\scriptsize $x(p)$};
+    % M
+    \node at (M) {\footnotesize $M\subset\symbb{R}^3$};
+    % X(U)
+    \node[\greentext] at (.1,-2.0) {\footnotesize $x(U)\subseteq\symbb{R}^2$};
+    
+    % \filldraw[fill=red,draw=black] (l) circle[radius=.5pt];
+    % \filldraw[fill=red,draw=black] (r) circle[radius=.5pt];
+    % \filldraw[fill=red,draw=black] (lchart) circle[radius=.5pt];
+    % \filldraw[fill=red,draw=black] (rchart) circle[radius=.5pt];
+    % 
+    % \filldraw[fill=red,draw=black] (btop) circle[radius=1pt];
+    % \filldraw[fill=red,draw=black] (bbottom) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bleft) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bright) circle[radius=1pt];
+    % \filldraw[fill opacity=0,draw=black] (O) circle[radius=2pt];
+    % YELLOW BACKGROUND
+    \begin{scope}[on background layer]
+      \node [background, fit= (bleft) (bright) (btop) (bbottom)] {};
+    \end{scope}
+  \end{tikzpicture}
+  \caption{We choose an arbitrary map $x$ from \emph{all the points in} $U$ on the surface of the
+    torus into a subset of $\symbb{R}^2$. The map $x$ is continuous, invertible, and its inverse is
+    also continuous, so $M$ is a \emph{2-topological manifold}. The pair $(U,x)$ is called a
+    \emph{chart}.}
+  \label{fig:mf-torus-chart}
+\end{figure}
+
+Note that $p$ is a point in the \emph{real world}. If $M$ was a sphere, representing the Earth,
+$p$ would have been the foot of the Eiffel tower (you could go there and touch it). $U$ could
+be the area of Paris, so $x(U)$ would be the image of the area of Paris in the chart.
+The coordinates of $x(U)$ have no meaning in the real world. In practice, the constructors of
+maps of the Earth write in the chart the longitude and latitude of the Eiffel tower instead its
+cartesian coordinates. The set of all the charts of the Earth is called an
+\emph{atlas}\footnotemark{}. 
+\footnotetext{The publisher could have decided to build an atlas using another set of $U$s and
+  another map $x$. By choosing another map he could have distorted the charts in a different
+  way.}
+
+It is only required that, for every point in the manifold, there exists a chart which contains
+the point, so the whole manifold can be covered by charts.
+
+\subsubsection{Second example}
+Let's consider a wire $M$ that forms a loop. The wire lives in three dimensions. We take the
+standard topology for $\symbb{R}^3$, $\symcal{O}_{\text{std}}$.
+For $M$ we take the inherited subset topology restricted to the set $M$,
+$\symcal{O}_{\text{std}}|_M$.
+
+We claim that this is a one-dimensional topological manifold. So, for every point $p$ in $M$,
+there exists an open set $U$ which contains the point. See figure~\ref{fig:mf-closed-line-3D}.
+\begin{figure}[ht]
+  \def\scl{.50}
+  \pgfmathsetmacro{\POINTRADIUS}{1.4}
+  \pgfmathsetmacro{\OPENENDRADIUS}{2.0}
+  \pgfmathsetmacro{\POINTRADIUS}{1.4}
+  \pgfmathsetmacro{\RAD}{1.0}
+  \pgfmathsetmacro{\RX}{3.0}
+  \pgfmathsetmacro{\LX}{-\RX}
+  \pgfmathsetmacro{\ANG}{45}
+  \pgfmathsetmacro{\BGTOP}{2.6}
+  \pgfmathsetmacro{\BGBOTTOM}{-2.3}
+  \pgfmathsetmacro{\BGRIGHT}{3.8}
+  \pgfmathsetmacro{\BGLEFT}{-3.8}
+  \centering
+  \begin{tikzpicture}[%
+    scale=\scl,
+    point/.style={fill=black,draw=black},
+    open end/.style={fill=\bgcolor,draw=black},
+    open set/.style={green!80!black,line width=1.7pt},
+    line/.style={line width=1.3pt,draw=black!50},
+    white/.style={line width=7pt,draw=\bgcolor},
+    background/.style={
+      line width=\bgborderwidth,
+      draw=\bgbordercolor,
+      fill=\bgcolor,
+    },
+    ]
+    \coordinate (O) at (0,0);
+    \coordinate (L) at (\LX,0);
+    \coordinate (LT) at (\LX+\RAD,\RAD);
+    \coordinate (LB) at (\LX+\RAD,-\RAD);
+    \coordinate (R) at (\RX,0);
+    \coordinate (RT) at (\RX-\RAD,\RAD);
+    \coordinate (RB) at (\RX-\RAD,-\RAD);
+    \coordinate (lo) at (-2.5,-.87);
+    \coordinate (ro) at (-1.5,-.95);
+    \coordinate (Mtext) at (2.5,1.8);
+    \coordinate (ptext) at (LB);
+    \coordinate (Utext) at (LB);
+    % 
+    \coordinate (bgtop) at (0,\BGTOP);
+    \coordinate (bgleft) at (\BGLEFT,0);
+    \coordinate (bgright) at (\BGRIGHT,0);
+    \coordinate (bgbottom) at (0,\BGBOTTOM);
+    % Lines
+    \draw[line] (R) to[out=90,in=0] (RT) to[out=180,in=\ANG] (O);
+    \draw[line] (L) to[out=-90,in=180] (LB) to[out=0,in=180+\ANG] (O);
+    % 
+    \draw[white] (L) to[out=90,in=180] (LT) to[out=0,in=180-\ANG] (O);
+    \draw[line] (L) to[out=90,in=180] (LT) to[out=0,in=180-\ANG] (O);
+    % 
+    \draw[white] (R) to[out=-90,in=0] (RB) to[out=180,in=360-\ANG] (O);
+    \draw[line] (R) to[out=-90,in=0] (RB) to[out=180,in=360-\ANG] (O);
+    % Open set
+    % \draw[open set] (lo) to[out=334,in=180] (LB) to[out=0,in=192] (ro);
+    % Left open end
+    % \filldraw[open end] (lo) circle[radius=\OPENENDRADIUS pt];
+    % Right open end
+    % \filldraw[open end] (ro) circle[radius=\OPENENDRADIUS pt];
+    % p
+    % \filldraw[point] (LB) circle[radius=\POINTRADIUS pt];
+    % Text
+    \node at (Mtext) {\footnotesize $M\subset\symbb{R}^3$};
+    % \node[below] at (ptext) {\scriptsize $p$};
+    % \node[above left=0pt and -2pt,green!70!black] at (Utext) {\scriptsize $U$};
+    % YELLOW BACKGROUND
+    % \filldraw[fill=red,draw=black] (bgtop) circle[radius=1pt];
+    % \filldraw[fill=red,draw=black] (bgbottom) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgleft) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgright) circle[radius=1pt];
+    % \filldraw[fill opacity=0,draw=black] (O) circle[radius=2pt];
+    \begin{scope}[on background layer]
+      \node [background, fit= (bgleft) (bgright) (bgtop) (bgbottom)] {};
+    \end{scope}
+  \end{tikzpicture}
+  \hspace{2em}
+  \begin{tikzpicture}[%
+    scale=\scl,
+    point/.style={fill=black,draw=black},
+    open end/.style={fill=\bgcolor,draw=black},
+    open set/.style={green!80!black,line width=1.7pt},
+    line/.style={line width=1.3pt,draw=black!50},
+    white/.style={line width=7pt,draw=\bgcolor},
+    background/.style={
+      line width=\bgborderwidth,
+      draw=\bgbordercolor,
+      fill=\bgcolor,
+    },
+    ]
+    \coordinate (O) at (0,0);
+    \coordinate (L) at (\LX,0);
+    \coordinate (LT) at (\LX+\RAD,\RAD);
+    \coordinate (LB) at (\LX+\RAD,-\RAD);
+    \coordinate (R) at (\RX,0);
+    \coordinate (RT) at (\RX-\RAD,\RAD);
+    \coordinate (RB) at (\RX-\RAD,-\RAD);
+    \coordinate (lo) at (-2.5,-.87);
+    \coordinate (ro) at (-1.5,-.95);
+    \coordinate (Mtext) at (2.5,1.8);
+    \coordinate (ptext) at (LB);
+    \coordinate (Utext) at (ro);
+    % 
+    \coordinate (bgtop) at (0,\BGTOP);
+    \coordinate (bgleft) at (\BGLEFT,0);
+    \coordinate (bgright) at (\BGRIGHT,0);
+    \coordinate (bgbottom) at (0,\BGBOTTOM);
+    % Lines
+    \draw[line] (R) to[out=90,in=0] (RT) to[out=180,in=\ANG] (O);
+    \draw[line] (L) to[out=-90,in=180] (LB) to[out=0,in=180+\ANG] (O);
+    % 
+    \draw[white] (L) to[out=90,in=180] (LT) to[out=0,in=180-\ANG] (O);
+    \draw[line] (L) to[out=90,in=180] (LT) to[out=0,in=180-\ANG] (O);
+    % 
+    \draw[white] (R) to[out=-90,in=0] (RB) to[out=180,in=360-\ANG] (O);
+    \draw[line] (R) to[out=-90,in=0] (RB) to[out=180,in=360-\ANG] (O);
+    % Open set
+    \draw[open set] (lo) to[out=334,in=180] (LB) to[out=0,in=192] (ro);
+    % Left open end
+    \filldraw[open end] (lo) circle[radius=\OPENENDRADIUS pt];
+    % Right open end
+    \filldraw[open end] (ro) circle[radius=\OPENENDRADIUS pt];
+    % p
+    \filldraw[point] (LB) circle[radius=\POINTRADIUS pt];
+    % Text
+    \node at (Mtext) {\footnotesize $M\subset\symbb{R}^3$};
+    \node[above] at (ptext) {\scriptsize $p$};
+    \node[below right,\greentext] at (Utext) {\footnotesize $U\subset M$};
+    % Map
+    % YELLOW BACKGROUND
+    % \filldraw[fill=red,draw=black] (bgtop) circle[radius=1pt];
+    % \filldraw[fill=red,draw=black] (bgbottom) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgleft) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgright) circle[radius=1pt];
+    % \filldraw[fill opacity=0,draw=black] (O) circle[radius=2pt];
+    \begin{scope}[on background layer]
+      \node [background, fit= (bgleft) (bgright) (bgtop) (bgbottom)] {};
+    \end{scope}
+  \end{tikzpicture}
+  \caption{At the left side, a loop in three dimensions $M$ is represented.
+    At the right we choose \emph{any} point $p$, on $M$. We can always find an arbitrary
+    \emph{open subset} $U$ of $M$ which contains the point.}
+  \label{fig:mf-closed-line-3D}
+\end{figure}
+
+And we can find a \emph{one-to-one} map $x$, from every point in $U$ into a subset of
+$\symbb{R}$. This map is invertible, and both $x$ and $x^{-1}$ are continuous.
+In the target $x(U)$ we choose the inherited standard topology in $\symbb{R}$ restricted to the
+set $X(U)$, $\symcal{O}_{\text{std}}|_{x(U)}$.
+See figure~\ref{fig:mf-closed-line-3D-chart}.
+\begin{figure}[ht]
+  \def\scl{.50}
+  \pgfmathsetmacro{\POINTRADIUS}{1.4}
+  \pgfmathsetmacro{\OPENENDRADIUS}{2.0}
+  \pgfmathsetmacro{\POINTRADIUS}{1.4}
+  \pgfmathsetmacro{\RAD}{1.0}
+  \pgfmathsetmacro{\RX}{3.0}
+  \pgfmathsetmacro{\LX}{-\RX}
+  \pgfmathsetmacro{\ANG}{45}
+  \pgfmathsetmacro{\BGTOP}{2.3}
+  \pgfmathsetmacro{\BGBOTTOM}{-5.6}
+  \pgfmathsetmacro{\BGRIGHT}{4.0}
+  \pgfmathsetmacro{\BGLEFT}{-5.8}
+  \centering
+  \begin{tikzpicture}[%
+    scale=\scl,
+    point/.style={fill=black,draw=black},
+    open end/.style={fill=\bgcolor,draw=black},
+    open set/.style={green!80!black,line width=1.7pt},
+    line/.style={line width=1.3pt,draw=black!50},
+    white/.style={line width=7pt,draw=\bgcolor},
+    map/.style={-{Latex[round]},shorten >=2pt,shorten <=2pt},
+    background/.style={
+      line width=\bgborderwidth,
+      draw=\bgbordercolor,
+      fill=\bgcolor,
+    },
+    ]
+    % Coordinates
+    \coordinate (O) at (0,0);
+    \coordinate (L) at (\LX,0);
+    \coordinate (LT) at (\LX+\RAD,\RAD);
+    \coordinate (LB) at (\LX+\RAD,-\RAD);
+    \coordinate (R) at (\RX,0);
+    \coordinate (RT) at (\RX-\RAD,\RAD);
+    \coordinate (RB) at (\RX-\RAD,-\RAD);
+    \coordinate (p) at (LB);
+    \coordinate (lo) at (-2.5,-.87);
+    \coordinate (ro) at (-1.5,-.95);
+    \coordinate (Mtext) at (2.5,1.8);
+    \coordinate (ptext) at (LB);
+    \coordinate (Utext) at (ro);
+    \coordinate (xlo) at (-4.5,-4.5);
+    \coordinate (xro) at (-2.0,-4.5);
+    \coordinate (xp) at (-2.9,-4.5);
+    % 
+    \coordinate (bgtop) at (0,\BGTOP);
+    \coordinate (bgleft) at (\BGLEFT,0);
+    \coordinate (bgright) at (\BGRIGHT,0);
+    \coordinate (bgbottom) at (0,\BGBOTTOM);
+    % Lines
+    \draw[line] (R) to[out=90,in=0] (RT) to[out=180,in=\ANG] (O);
+    \draw[line] (L) to[out=-90,in=180] (LB) to[out=0,in=180+\ANG] (O);
+    % 
+    \draw[white] (L) to[out=90,in=180] (LT) to[out=0,in=180-\ANG] (O);
+    \draw[line] (L) to[out=90,in=180] (LT) to[out=0,in=180-\ANG] (O);
+    % 
+    \draw[white] (R) to[out=-90,in=0] (RB) to[out=180,in=360-\ANG] (O);
+    \draw[line] (R) to[out=-90,in=0] (RB) to[out=180,in=360-\ANG] (O);
+    % Open set
+    \draw[open set] (lo) to[out=334,in=180] (LB) to[out=0,in=192] (ro);
+    % Left open end
+    \filldraw[open end] (lo) circle[radius=\OPENENDRADIUS pt];
+    % Right open end
+    \filldraw[open end] (ro) circle[radius=\OPENENDRADIUS pt];
+    % p
+    \filldraw[point] (LB) circle[radius=\POINTRADIUS pt];
+    % Text
+    \node at (Mtext) {\footnotesize $M\subset\symbb{R}^3$};
+    \node[above] at (ptext) {\scriptsize $p$};
+    \node[below right=0pt and 0pt,\greentext] at (Utext) {\footnotesize $U\subset M$};
+    % Chart
+    \draw[open set] (xlo) -- (xro);
+    % Right open end
+    \filldraw[open end] (xro) circle[radius=\OPENENDRADIUS pt]
+    node[right=9pt,\greentext] {\footnotesize $x(U)\subseteq\symbb{R}$};
+    % Left open end
+    \filldraw[open end] (xlo) circle[radius=\OPENENDRADIUS pt];
+    % x(p)
+    \filldraw[point] (xp) circle[radius=\POINTRADIUS pt]
+    node[below] {\scriptsize $x(p)$};
+    % Map
+    \draw[map] (lo) to[bend right] (xlo);
+    \draw[map] (ro) to[bend right] (xro);
+    \draw[map] (p) to[bend right] (xp);
+    % YELLOW BACKGROUND
+    % 
+    % \filldraw[fill=red,draw=black] (bgtop) circle[radius=1pt];
+    % \filldraw[fill=red,draw=black] (bgbottom) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgleft) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgright) circle[radius=1pt];
+    % \filldraw[fill opacity=0,draw=black] (O) circle[radius=2pt];
+    \begin{scope}[on background layer]
+      \node [background, fit= (bgleft) (bgright) (bgtop) (bgbottom)] {};
+    \end{scope}
+  \end{tikzpicture}
+  \caption{We can always invent a \emph{one-to-one} map which takes every point in $U$ into some
+    subset of $\symbb{R}$. This map is invertible, and with the said topologies, both, the map
+    and its inverse are continuous.}
+  \label{fig:mf-closed-line-3D-chart}
+\end{figure}
+
+\subsubsection{Third example}
+Now we take a subset $M$ of $\symbb{R}^2$ as in figure~\ref{fig:mf-three-lines}.
+\begin{figure}[ht]
+  \def\scl{.55}
+  \pgfmathsetmacro{\POINTRADIUS}{1.4}
+  \pgfmathsetmacro{\OPENENDRADIUS}{2.0}
+  \pgfmathsetmacro{\POINTRADIUS}{1.4}
+  \pgfmathsetmacro{\RAD}{1.0}
+  \pgfmathsetmacro{\RX}{3.0}
+  \pgfmathsetmacro{\LX}{-3.0}
+  \pgfmathsetmacro{\LY}{0.4}
+  \pgfmathsetmacro{\PX}{-1.4}
+  \pgfmathsetmacro{\PY}{0.3}
+  \pgfmathsetmacro{\ANG}{45}
+  \pgfmathsetmacro{\BGTOP}{2.6}
+  \pgfmathsetmacro{\BGBOTTOM}{-2.3}
+  \pgfmathsetmacro{\BGRIGHT}{3.8}
+  \pgfmathsetmacro{\BGLEFT}{-3.8}
+  \centering
+  \begin{tikzpicture}[%
+    scale=\scl,
+    point/.style={fill=black,draw=black},
+    open end/.style={fill=\bgcolor,draw=black},
+    open set/.style={green!80!black,line width=1.7pt},
+    line/.style={line width=1.3pt,draw=black!50},
+    white/.style={line width=7pt,draw=\bgcolor},
+    background/.style={
+      line width=\bgborderwidth,
+      draw=\bgbordercolor,
+      fill=\bgcolor,
+    },
+    ]
+    \coordinate (O) at (0,0);
+    \coordinate (L) at (\LX,\LY);
+    \coordinate (p) at (\PX,\PY);
+    \coordinate (RT) at (\RX-\RAD,\RAD);
+    \coordinate (RB) at (\RX-\RAD,-\RAD);
+    
+    \coordinate (lo) at (-2.0,0.48);
+    \coordinate (ro) at (-0.8,0.08);
+    \coordinate (Mtext) at (2.5,1.8);
+    % \coordinate (ptext) at (LB);
+    % \coordinate (Utext) at (LB);
+    %      % 
+    \coordinate (bgtop) at (0,\BGTOP);
+    \coordinate (bgleft) at (\BGLEFT,0);
+    \coordinate (bgright) at (\BGRIGHT,0);
+    \coordinate (bgbottom) at (0,\BGBOTTOM);
+    % Lines
+    % \draw[line] (L) to[out=20,in=170] (O);
+    \draw[line] (L) to[out=20,in=160] (p);
+    \draw[line] (p) to[out=335,in=180] (O);
+    \draw[line] (O) to[out=60,in=170] (RT);
+    \draw[line] (O) to[out=350,in=170] (RB);
+    % Ends
+    \filldraw[open end] (L) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[open end] (RT) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[open end] (RB) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[point] (O) circle[radius=.8pt];
+    % \filldraw[point] (p) circle[radius=\OPENENDRADIUS pt]
+    % node[above] {\scriptsize $p$};
+    %      % Text
+    \node at (Mtext) {\footnotesize $M\subset\symbb{R}^2$};
+    % YELLOW BACKGROUND
+    %      % \filldraw[fill=red,draw=black] (bgtop) circle[radius=1pt];
+    %      % \filldraw[fill=red,draw=black] (bgbottom) circle[radius=1pt];
+    %      % \filldraw[fill=green,draw=black] (bgleft) circle[radius=1pt];
+    %      % \filldraw[fill=green,draw=black] (bgright) circle[radius=1pt];
+    %      % \filldraw[fill opacity=0,draw=black] (O) circle[radius=2pt];
+    \begin{scope}[on background layer]
+      \node [background, fit= (bgleft) (bgright) (bgtop) (bgbottom)] {};
+    \end{scope}
+  \end{tikzpicture}
+  \caption{A subset of $\symbb{R}^2$.}
+  \label{fig:mf-three-lines}
+\end{figure}
+
+We consider the standard topology on $\symbb{R}^2$ and the inherited topology restricted to $M$
+for the subset $\symcal{O}_{\text{std}}|_M$.
+% \begin{center}
+%   \def\scl{1}
+%   \centering
+%   \begin{tikzpicture}[%
+%     scale=\scl,
+%     curled/.style={%
+%     green!50!black,
+%     -{Stealth},
+%     decorate,
+%     decoration={snake,post length=4.3pt,amplitude=1.3pt,segment length=3.5pt},
+%   },
+%     ]
+%     \node[baseline] (M) at (0,0) {$M$};
+%     \node[right = -.4em of M,baseline] (subset) {$\subset$};
+%     \node[right = -.4em of subset,baseline] (R2) {$\symbb{R}^2$};
+%     \node[below = 1.5em of M] (bM) {\small $\symcal{O}_{\text{std}}|_M$};
+%     \node[below = 1.5em of R2] (bR2) {\small $\symcal{O}_{\text{std}}$};
+%     \draw[curled] (bM) -- (M);
+%     \draw[curled] (bR2) -- (R2);
+%   \end{tikzpicture}
+% \end{center}
+We claim that $(M,\symcal{O}_{\text{std}}|M)$ is a topological space but it fails to be
+a topological manifold.
+
+Of course, for every point on $M$, we could find an open set $U$ which contains it.
+See figure~\ref{fig:mf-three-lines-pU}.
+\begin{figure}[ht]
+  \def\scl{.55}
+  \pgfmathsetmacro{\OPENENDRADIUS}{2.0}
+  \pgfmathsetmacro{\POINTRADIUS}{1.4}
+  \pgfmathsetmacro{\RAD}{1.0}
+  \pgfmathsetmacro{\RX}{3.0}
+  \pgfmathsetmacro{\LX}{-3.0}
+  \pgfmathsetmacro{\LY}{0.4}
+  \pgfmathsetmacro{\BGTOP}{2.6}
+  \pgfmathsetmacro{\BGBOTTOM}{-2.3}
+  \pgfmathsetmacro{\BGRIGHT}{3.8}
+  \pgfmathsetmacro{\BGLEFT}{-3.8}
+  \centering
+  \begin{tikzpicture}[%
+    scale=\scl,
+    point/.style={fill=black,draw=black},
+    open end/.style={fill=\bgcolor,draw=black},
+    open set/.style={green!80!black,line width=1.7pt},
+    line/.style={line width=1.3pt,draw=black!50},
+    white/.style={line width=7pt,draw=\bgcolor},
+    background/.style={
+      line width=\bgborderwidth,
+      draw=\bgbordercolor,
+      fill=\bgcolor,
+    },
+    ]
+    \pgfmathsetmacro{\PX}{-1.4}
+    \pgfmathsetmacro{\PY}{0.3}
+    % Coordinates
+    \coordinate (O) at (0,0);
+    \coordinate (L) at (\LX,\LY);
+    \coordinate (p) at (\PX,\PY);
+    \coordinate (RT) at (\RX-\RAD,\RAD);
+    \coordinate (RB) at (\RX-\RAD,-\RAD);
+    \coordinate (lo) at (-2.0,0.48);
+    \coordinate (ro) at (-0.8,0.08);
+    % 
+    \coordinate (Mtext) at (2.5,1.8);
+    % 
+    \coordinate (bgtop) at (0,\BGTOP);
+    \coordinate (bgleft) at (\BGLEFT,0);
+    \coordinate (bgright) at (\BGRIGHT,0);
+    \coordinate (bgbottom) at (0,\BGBOTTOM);
+    % Lines
+    \draw[line] (L) to[out=20,in=160] (p);
+    \draw[line] (p) to[out=335,in=180] (O);
+    \draw[line] (O) to[out=60,in=170] (RT);
+    \draw[line] (O) to[out=350,in=170] (RB);
+    % Open set
+    \filldraw[open set] (lo) to[out=348,in=160] (p);
+    \filldraw[open set] (p) to[out=335,in=170] (ro);
+    \node[below left=4pt and 0pt,\greentext] at (p) {\footnotesize $U\subset M$};
+    % Ends
+    \filldraw[open end] (L) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[open end] (RT) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[open end] (RB) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[point] (O) circle[radius=.8pt];
+    \filldraw[point] (p) circle[radius=\OPENENDRADIUS pt]
+    node[above] {\scriptsize $p$};
+    \filldraw[open end] (lo) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[open end] (ro) circle[radius=\OPENENDRADIUS pt];
+    % Text
+    \node at (Mtext) {\footnotesize $M\subset\symbb{R}^2$};
+    % YELLOW BACKGROUND
+    % \filldraw[fill=red,draw=black] (bgtop) circle[radius=1pt];
+    % \filldraw[fill=red,draw=black] (bgbottom) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgleft) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgright) circle[radius=1pt];
+    % \filldraw[fill opacity=0,draw=black] (O) circle[radius=2pt];
+    \begin{scope}[on background layer]
+      \node [background, fit= (bgleft) (bgright) (bgtop) (bgbottom)] {};
+    \end{scope}
+  \end{tikzpicture}
+  \hspace{2em}
+  \begin{tikzpicture}[%
+    scale=\scl,
+    point/.style={fill=black,draw=black},
+    open end/.style={fill=\bgcolor,draw=black},
+    open set/.style={green!80!black,line width=1.7pt},
+    line/.style={line width=1.3pt,draw=black!50},
+    white/.style={line width=7pt,draw=\bgcolor},
+    background/.style={
+      line width=\bgborderwidth,
+      draw=\bgbordercolor,
+      fill=\bgcolor,
+    },
+    ]
+    \pgfmathsetmacro{\MX}{-1.4}
+    \pgfmathsetmacro{\MY}{0.3}
+    % \pgfmathsetmacro{\ANG}{45}
+    
+    \coordinate (O) at (0,0);
+    \coordinate (L) at (\LX,\LY);
+    \coordinate (m) at (\MX,\MY);
+    \coordinate (p) at (O);
+    \coordinate (RT) at (\RX-\RAD,\RAD);
+    \coordinate (RB) at (\RX-\RAD,-\RAD);
+    \coordinate (lo) at (-0.8,0.08);
+    \coordinate (rto) at (0.5,0.61);
+    \coordinate (rbo) at (0.6,-0.225);
+    
+    \coordinate (Mtext) at (2.5,1.8);
+    % \coordinate (ptext) at (LB);
+    % \coordinate (Utext) at (LB);
+    % 
+    \coordinate (bgtop) at (0,\BGTOP);
+    \coordinate (bgleft) at (\BGLEFT,0);
+    \coordinate (bgright) at (\BGRIGHT,0);
+    \coordinate (bgbottom) at (0,\BGBOTTOM);
+    % Lines
+    % \draw[line] (L) to[out=20,in=170] (O);
+    \draw[line] (L) to[out=20,in=160] (m);
+    \draw[line] (m) to[out=335,in=180] (O);
+    \draw[line] (O) to[out=60,in=170] (RT);
+    \draw[line] (O) to[out=350,in=170] (RB);
+    % 
+    \filldraw[open set] (lo) to[out=345,in=180] (p);
+    \filldraw[open set] (p) to[out=60,in=218] (rto);
+    \filldraw[open set] (p) to[out=350,in=145] (rbo);
+    \node[below left=4pt and 0pt,\greentext] at (p) {\footnotesize $U\subseteq M$};
+    % Ends
+    \filldraw[open end] (L) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[open end] (RT) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[open end] (RB) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[point] (O) circle[radius=.8pt];
+    \filldraw[point] (p) circle[radius=\OPENENDRADIUS pt]
+    node[above left=-0.8pt and -3pt] {\scriptsize $p$};
+    \filldraw[open end] (lo) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[open end] (rto) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[open end] (rbo) circle[radius=\OPENENDRADIUS pt];
+    \node at (Mtext) {\footnotesize $M\subset\symbb{R}^2$};
+    % Map
+    % YELLOW BACKGROUND
+    % \filldraw[fill=red,draw=black] (bgtop) circle[radius=1pt];
+    % \filldraw[fill=red,draw=black] (bgbottom) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgleft) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgright) circle[radius=1pt];
+    % \filldraw[fill opacity=0,draw=black] (O) circle[radius=2pt];
+    \begin{scope}[on background layer]
+      \node [background, fit= (bgleft) (bgright) (bgtop) (bgbottom)] {};
+    \end{scope}
+  \end{tikzpicture}
+  \caption{For every point in $M$ we cand find an open set which contains it.}
+  \label{fig:mf-three-lines-pU}
+\end{figure}
+
+For most points $p$ in $M$, like the one represented at the left side of
+figure~\ref{fig:mf-three-lines-pU}, we could always find an invertible map $x$, from every point
+in the open set $U$ into some subset of $\symbb{R}$, so that both, $x$ and $x^{-1}$ are
+continuous under the considered topologies. See figure~\ref{fig:mf-three-lines-invertible-map}.
+\begin{figure}[ht]
+  \def\scl{.50}
+  \pgfmathsetmacro{\POINTRADIUS}{1.4}
+  \pgfmathsetmacro{\OPENENDRADIUS}{2.0}
+  \pgfmathsetmacro{\POINTRADIUS}{1.4}
+  \pgfmathsetmacro{\RAD}{1.0}
+  \pgfmathsetmacro{\RX}{3.0}
+  \pgfmathsetmacro{\LX}{-3.0}
+  \pgfmathsetmacro{\LY}{0.4}
+  \pgfmathsetmacro{\PX}{-1.4}
+  \pgfmathsetmacro{\PY}{0.3}
+  % \pgfmathsetmacro{\ANG}{45}
+  \pgfmathsetmacro{\BGTOP}{2.6}
+  \pgfmathsetmacro{\BGBOTTOM}{-5.6}
+  \pgfmathsetmacro{\BGRIGHT}{4.0}
+  \pgfmathsetmacro{\BGLEFT}{-5.8}
+  \centering
+  \begin{tikzpicture}[%
+    scale=\scl,
+    point/.style={fill=black,draw=black},
+    open end/.style={fill=\bgcolor,draw=black},
+    open set/.style={green!80!black,line width=1.7pt},
+    line/.style={line width=1.3pt,draw=black!50},
+    white/.style={line width=7pt,draw=\bgcolor},
+    map/.style={-{Latex[round]},shorten >=2pt,shorten <=2pt},
+    background/.style={
+      line width=\bgborderwidth,
+      draw=\bgbordercolor,
+      fill=\bgcolor,
+    },
+    ]
+    \coordinate (O) at (0,0);
+    \coordinate (L) at (\LX,\LY);
+    \coordinate (p) at (\PX,\PY);
+    \coordinate (RT) at (\RX-\RAD,\RAD);
+    \coordinate (RB) at (\RX-\RAD,-\RAD);
+    \coordinate (lo) at (-2.0,0.48);
+    \coordinate (ro) at (-0.8,0.08);
+    \coordinate (xlo) at (-4.5,-4.5);
+    \coordinate (xro) at (-2.0,-4.5);
+    
+    \coordinate (Mtext) at (2.5,1.8);
+    % \coordinate (ptext) at (LB);
+    % \coordinate (Utext) at (LB);
+    % 
+    \coordinate (bgtop) at (0,\BGTOP);
+    \coordinate (bgleft) at (\BGLEFT,0);
+    \coordinate (bgright) at (\BGRIGHT,0);
+    \coordinate (bgbottom) at (0,\BGBOTTOM);
+    
+    % Lines
+    % \draw[line] (L) to[out=20,in=170] (O);
+    \draw[line] (L) to[out=20,in=160] (p);
+    \draw[line] (p) to[out=335,in=180] (O);
+    \draw[line] (O) to[out=60,in=170] (RT);
+    \draw[line] (O) to[out=350,in=170] (RB);
+    
+    \filldraw[open set] (lo) to[out=348,in=160] (p);
+    \filldraw[open set] (p) to[out=335,in=170] (ro);
+    \node[above left=8pt and 0pt,\greentext] at (p) {\footnotesize $U\subset M$};
+    % \filldraw[open set] (p) to[out=335,in=180] (ro);
+    
+    % Ends
+    \filldraw[open end] (L) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[open end] (RT) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[open end] (RB) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[point] (O) circle[radius=.8pt];
+    \filldraw[point] (p) circle[radius=\OPENENDRADIUS pt]
+    node[above] {\scriptsize $p$};
+    \filldraw[open end] (lo) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[open end] (ro) circle[radius=\OPENENDRADIUS pt];
+    
+    % Chart
+    \draw[open set] (xlo) -- (xro);
+    % Right open end
+    \filldraw[open end] (xro) circle[radius=\OPENENDRADIUS pt]
+    node[right=9pt,\greentext] {\footnotesize $x(U)\subseteq\symbb{R}$};
+    % Left open end
+    \filldraw[open end] (xlo) circle[radius=\OPENENDRADIUS pt];
+    % x(p)
+    \filldraw[point] (xp) circle[radius=\POINTRADIUS pt]
+    node[below] {\scriptsize $x(p)$};
+    % Map
+    \draw[map] (lo) to[bend right] (xlo);
+    \draw[map] (ro) to[bend right] (xro);
+    \draw[map] (p) to[bend right] (xp);
+    % Text
+    \node at (Mtext) {\footnotesize $M\subset\symbb{R}^2$};
+    % YELLOW BACKGROUND
+    % 
+    % \filldraw[fill=red,draw=black] (bgtop) circle[radius=1pt];
+    % \filldraw[fill=red,draw=black] (bgbottom) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgleft) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgright) circle[radius=1pt];
+    % \filldraw[fill opacity=0,draw=black] (O) circle[radius=2pt];
+    \begin{scope}[on background layer]
+      \node [background, fit= (bgleft) (bgright) (bgtop) (bgbottom)] {};
+    \end{scope}
+  \end{tikzpicture}
+  \caption{For every point in $M$, \emph{except one}, we could find an open set $U$ containing the
+    point, and invent a map $x$ that takes every point in $U$ to the real line, such that this
+    map is invertible and continuous, and its inverse is also continuous.}
+  \label{fig:mf-three-lines-invertible-map}
+\end{figure}
+
+But, when we choose the intersection point $p$ as in the right side of
+figure~\ref{fig:mf-three-lines-pU}, we could not invent such a map:
+
+\begin{itemize}
+\item
+  If we target $x(U)$ was a single open set in the real line, as at the left side of
+  figure~\ref{fig:mf-three-lines-wrong-map}, such a map would not be \emph{one-to-one},
+  because there were some points in $x(U)$ that would be the image of various points in $U$.
+  So the map would not be invertible.
+\item
+  But, if the target $x(U)$ was a collection of open sets in $\symbb{R}$, then the map would
+  be continuous and invertible, but the inverse would not be continuous, as there were some
+  open sets in $U$ (involving parts of both, the green and the red subsets, whose preimages are not
+  in $\symcal{O}_{\text{std}}|_{x(U)}$. See the right side of
+  figure~\ref{fig:mf-three-lines-wrong-map}.
+\end{itemize}
+
+\begin{figure}[ht]
+  \def\scl{.50}
+  \pgfmathsetmacro{\POINTRADIUS}{1.4}
+  \pgfmathsetmacro{\OPENENDRADIUS}{2.0}
+  \pgfmathsetmacro{\POINTRADIUS}{1.4}
+  \pgfmathsetmacro{\RAD}{1.0}
+  \pgfmathsetmacro{\RX}{3.0}
+  \pgfmathsetmacro{\LX}{-3.0}
+  \pgfmathsetmacro{\LY}{0.4}
+  \pgfmathsetmacro{\MX}{-1.4}
+  \pgfmathsetmacro{\MY}{0.3}
+  \pgfmathsetmacro{\ANG}{45}
+  \pgfmathsetmacro{\BGTOP}{2.6}
+  \pgfmathsetmacro{\BGBOTTOM}{-5.6}
+  \pgfmathsetmacro{\BGRIGHT}{4.0}
+  \pgfmathsetmacro{\BGLEFT}{-5.8}
+  \centering
+  \begin{tikzpicture}[%
+    scale=\scl,
+    point/.style={fill=black,draw=black},
+    open end/.style={fill=\bgcolor,draw=black},
+    open set/.style={green!80!black,line width=1.7pt},
+    line/.style={line width=1.3pt,draw=black!50},
+    white/.style={line width=7pt,draw=\bgcolor},
+    map/.style={-{Latex[round]},shorten >=2pt,shorten <=1.6pt},
+    background/.style={
+      line width=\bgborderwidth,
+      draw=\bgbordercolor,
+      fill=\bgcolor,
+    },
+    ]
+    \coordinate (O) at (0,0);
+    \coordinate (L) at (\LX,\LY);
+    \coordinate (m) at (\MX,\MY);
+    \coordinate (p) at (O);
+    \coordinate (RT) at (\RX-\RAD,\RAD);
+    \coordinate (RB) at (\RX-\RAD,-\RAD);
+    \coordinate (lo) at (-0.8,0.08);
+    \coordinate (rto) at (0.5,0.61);
+    \coordinate (rtm) at (0.2,0.3);
+    \coordinate (rbo) at (0.6,-0.225);
+    \coordinate (rbm) at (0.4,-0.111);
+    \coordinate (xp) at (-3.4,-4.5);
+    \coordinate (xm) at (-2.5,-4.5);
+    
+    \coordinate (xlo) at (-4.5,-4.5);
+    \coordinate (xro) at (-2.0,-4.5);
+    
+    \coordinate (Mtext) at (2.5,1.8);
+    % 
+    \coordinate (bgtop) at (0,\BGTOP);
+    \coordinate (bgleft) at (\BGLEFT,0);
+    \coordinate (bgright) at (\BGRIGHT,0);
+    \coordinate (bgbottom) at (0,\BGBOTTOM);
+    
+    % Lines
+    \draw[line] (L) to[out=20,in=160] (m);
+    \draw[line] (m) to[out=335,in=180] (O);
+    \draw[line] (O) to[out=60,in=170] (RT);
+    \draw[line] (O) to[out=350,in=170] (RB);
+    
+    \filldraw[open set] (lo) to[out=345,in=180] (p);
+    \filldraw[open set,red!85!black] (p) to[out=60,in=218] (rto);
+    \filldraw[open set] (p) to[out=350,in=145] (rbo);
+    
+    % \filldraw[fill=blue] (rtm) circle[radius=.5pt];
+    % \filldraw (rbm) circle[radius=.5pt];
+    
+    % Ends
+    \filldraw[open end] (L) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[open end] (RT) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[open end] (RB) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[point] (O) circle[radius=.8pt];
+    \filldraw[point] (p) circle[radius=\OPENENDRADIUS pt];
+    % node[above] {\scriptsize $p$};
+    \filldraw[open end] (lo) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[open end] (rto) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[open end] (rbo) circle[radius=\OPENENDRADIUS pt];
+    
+    % Chart
+    \draw[open set,line width=2pt] (xlo) -- (xro);
+    % Right open end
+    \filldraw[open end] (xro) circle[radius=\OPENENDRADIUS pt]
+    node[right=9pt,\greentext] {\footnotesize $x(U)\subseteq\symbb{R}$};
+    % Left open end
+    \filldraw[open end] (xlo) circle[radius=\OPENENDRADIUS pt];
+    % x(p)
+    \filldraw[point] (xp) circle[radius=\POINTRADIUS pt]
+    node[below] {\scriptsize $x(p)$};
+    
+    % Map
+    \draw[map,black!20] (lo) to[bend right] (xlo);
+    \draw[map,black!20] (rbo) to[bend right] (xro);
+    % \draw[map] (p) to[bend right] (xp);
+    \draw[map,red!70!black] (rtm) to[bend right] (xm);
+    \draw[map,shorten <=0pt,green!50!black] (rbm) to[bend right] (xm);
+    % Text
+    \node at (Mtext) {\footnotesize $M\subset\symbb{R}^2$};
+    
+    \filldraw (rtm) circle[radius=.5pt];
+    \filldraw (rbm) circle[radius=.5pt];
+    % YELLOW BACKGROUND
+    % 
+    % \filldraw[fill=red,draw=black] (bgtop) circle[radius=1pt];
+    % \filldraw[fill=red,draw=black] (bgbottom) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgleft) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgright) circle[radius=1pt];
+    % \filldraw[fill opacity=0,draw=black] (O) circle[radius=2pt];
+    \begin{scope}[on background layer]
+      \node [background, fit= (bgleft) (bgright) (bgtop) (bgbottom)] {};
+    \end{scope}
+  \end{tikzpicture}
+  \hspace{2em}
+  \begin{tikzpicture}[%
+    scale=\scl,
+    point/.style={fill=black,draw=black},
+    open end/.style={fill=\bgcolor,draw=black},
+    open set/.style={green!80!black,line width=1.7pt},
+    line/.style={line width=1.3pt,draw=black!50},
+    white/.style={line width=7pt,draw=\bgcolor},
+    map/.style={-{Latex[round]},shorten >=2pt,shorten <=1.6pt},
+    background/.style={
+      line width=\bgborderwidth,
+      draw=\bgbordercolor,
+      fill=\bgcolor,
+    },
+    ]
+    \coordinate (O) at (0,0);
+    \coordinate (L) at (\LX,\LY);
+    \coordinate (m) at (\MX,\MY);
+    \coordinate (p) at (O);
+    \coordinate (RT) at (\RX-\RAD,\RAD);
+    \coordinate (RB) at (\RX-\RAD,-\RAD);
+    \coordinate (lo) at (-0.8,0.08);
+    \coordinate (rto) at (0.5,0.61);
+    \coordinate (rtm) at (0.2,0.3);
+    \coordinate (rbo) at (0.6,-0.225);
+    \coordinate (rbm) at (0.4,-0.111);
+    \coordinate (xp) at (-3.4,-4.5);
+    \coordinate (xm) at (-2.5,-4.5);
+    
+    \coordinate (xlo) at (-4.5,-4.5);
+    \coordinate (xro) at (-2.0,-4.5);
+    \coordinate (xlo2) at (0.0,-4.5);
+    \coordinate (xro2) at (2.0,-4.5);
+    
+    \coordinate (Mtext) at (2.5,1.8);
+    % 
+    \coordinate (bgtop) at (0,\BGTOP);
+    \coordinate (bgleft) at (\BGLEFT,0);
+    \coordinate (bgright) at (\BGRIGHT,0);
+    \coordinate (bgbottom) at (0,\BGBOTTOM);
+    
+    % Lines
+    \draw[line] (L) to[out=20,in=160] (m);
+    \draw[line] (m) to[out=335,in=180] (O);
+    \draw[line] (O) to[out=60,in=170] (RT);
+    \draw[line] (O) to[out=350,in=170] (RB);
+    \filldraw[open set] (lo) to[out=345,in=180] (p);
+    \filldraw[open set,red!85!black] (p) to[out=60,in=218] (rto);
+    \filldraw[open set] (p) to[out=350,in=145] (rbo);
+    
+    % Ends of M
+    \filldraw[open end] (L) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[open end] (RT) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[open end] (RB) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[point] (O) circle[radius=.8pt];
+    
+    % Point
+    \filldraw[point,fill=black,draw=red] (p) circle[radius=2.7pt];
+    
+    % node[above] {\scriptsize $p$};
+    % Open ends of U
+    \filldraw[open end] (lo) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[open end] (rto) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[open end] (rbo) circle[radius=\OPENENDRADIUS pt];
+    
+    % Target 1
+    \draw[open set,line width=2pt] (xlo) -- (xro);
+    % Right open end
+    \filldraw[open end] (xro) circle[radius=\OPENENDRADIUS pt];
+    % node[right=9pt,\greentext] {\footnotesize $x(U)\subseteq\symbb{R}$};
+    % Left open end
+    \filldraw[open end] (xlo) circle[radius=\OPENENDRADIUS pt];
+    % x(p)
+    \filldraw[point] (xp) circle[radius=\POINTRADIUS pt]
+    node[below] {\scriptsize $x(p)$};
+    
+    % Target 2
+    \draw[open set,line width=2pt,red!85!black] (xlo2) -- (xro2);
+    % Right open end
+    \filldraw[open end] (xro2) circle[radius=\OPENENDRADIUS pt];
+    % Left open end
+    \filldraw[open end] (xlo2) circle[radius=\OPENENDRADIUS pt];
+    
+    % Map
+    % Target 1
+    \draw[map,black!20] (lo) to[bend right] (xlo);
+    \draw[map,black!20] (rbo) to[bend right] (xro);
+    % Target 2
+    % draw[map,black!20] (p) to[bend left] (xlo2);
+    % draw[map,black!20] (rto) to[bend left] (xro2);
+    \draw[map,black!20] (p) to[out=20,in=60] (xlo2);
+    \draw[map,black!20] (rto) to[out=0,in=60] (xro2);
+    
+    \draw[map] (p) to[bend right] (xp);
+    % \draw[map,red!70!black] (rtm) to[bend right] (xm);
+    % \draw[map,shorten <=0pt,green!50!black] (rbm) to[bend right] (xm);
+    % Text
+    \node at (Mtext) {\footnotesize $M\subset\symbb{R}^2$};
+    
+    % \filldraw (rtm) circle[radius=.5pt];
+    % \filldraw (rbm) circle[radius=.5pt];
+    % YELLOW BACKGROUND
+    % 
+    % \filldraw[fill=red,draw=black] (bgtop) circle[radius=1pt];
+    % \filldraw[fill=red,draw=black] (bgbottom) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgleft) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgright) circle[radius=1pt];
+    % \filldraw[fill opacity=0,draw=black] (O) circle[radius=2pt];
+    \begin{scope}[on background layer]
+      \node [background, fit= (bgleft) (bgright) (bgtop) (bgbottom)] {};
+    \end{scope}
+  \end{tikzpicture}    
+  \caption{When we choose the point in the intersection of the lines, we cannot possibly find
+    a \emph{one-to-one} map. This map would fail to be invertible or the inverse would not be
+    continuous, so $(M,\symcal{O}_{\text{std}}|_M)$ is not a manifold.}
+  \label{fig:mf-three-lines-wrong-map}
+\end{figure}
+
+So $M$ is not a topological manifold.
+
+It is not difficult to come up with stuff that is not a topological manifold. String theorists,
+for instance, like to think about d-branes with a little string attached to them as in
+figure~\ref{fig:mf-dbrane-string}. But this the whole object is not a manifold, as the brane is
+two dimensional, while the string is one dimensional, but the definition requires the same
+dimension applied everywhere.
+\begin{figure}[ht]
+  \def\scl{.5}
+  % 
+  \pgfmathsetmacro{\PoneX}{-2.0}
+  \pgfmathsetmacro{\PoneY}{2.0}
+  \pgfmathsetmacro{\PtwoX}{0.3}
+  \pgfmathsetmacro{\PtwoY}{3.0}
+  \pgfmathsetmacro{\PthreeX}{-.9}
+  \pgfmathsetmacro{\PthreeY}{-2.8}
+  \pgfmathsetmacro{\PfourX}{2.5}
+  \pgfmathsetmacro{\PfourY}{-1.0}
+  \pgfmathsetmacro{\PX}{0}
+  \pgfmathsetmacro{\PY}{.8}
+  \pgfmathsetmacro{\MX}{0.9}
+  \pgfmathsetmacro{\MY}{1.5}
+  \pgfmathsetmacro{\EX}{3.5}
+  \pgfmathsetmacro{\EY}{1.7}
+  \pgfmathsetmacro{\BGTOP}{4.0}
+  \pgfmathsetmacro{\BGBOTTOM}{-4.0}
+  \pgfmathsetmacro{\BGRIGHT}{5.4}
+  \pgfmathsetmacro{\BGLEFT}{-4.4}
+  \centering
+  \begin{tikzpicture}[%
+    scale=\scl,
+    dbrane/.style={dotted,fill=black!12,draw=black},
+    string/.style={draw=black,line width=1.2pt},
+    background/.style={
+      line width=\bgborderwidth,
+      draw=\bgbordercolor,
+      fill=\bgcolor,
+    },      
+    ]
+    % Coordinates
+    \coordinate (O) at (0,0);
+    % 
+    \coordinate (P1) at (\PoneX,\PoneY);
+    \coordinate (P2) at (\PtwoX,\PtwoY);
+    \coordinate (P3) at (\PthreeX,\PthreeY);
+    \coordinate (P4) at (\PfourX,\PfourY);
+    % 
+    \coordinate (P) at (\PX,\PY);
+    \coordinate (M) at (\MX,\MY);
+    \coordinate (E) at (\EX,\EY);
+    % 
+    \coordinate (bgtop) at (0,\BGTOP);
+    \coordinate (bgleft) at (\BGLEFT,0);
+    \coordinate (bgright) at (\BGRIGHT,0);
+    \coordinate (bgbottom) at (0,\BGBOTTOM);
+    % Plane
+    % \filldraw[fill=red,draw=black] (P1) circle [radius=1pt];
+    % \filldraw[fill=red,draw=black] (P2) circle [radius=1pt];
+    % \filldraw[fill=red,draw=black] (P3) circle [radius=1pt];
+    % \filldraw[fill=red,draw=black] (P4) circle [radius=1pt];
+    % d-Brane
+    \filldraw[dbrane]
+    (P1) to[bend right]
+    (P2) to[out=290,in=110]
+    (P4) to[bend right]
+    (P3) to[out=100,in=300]
+    (P1);
+    % String
+    \filldraw[fill=black,draw=black] (P) circle [radius=1.5pt];
+    % \filldraw[fill=black,draw=black] (M) circle [radius=1pt];
+    % \filldraw[fill=black,draw=black] (E) circle [radius=1pt];
+    \draw[string] (P) to[out=60,in=200] (M);
+    \draw[string] (M) to[out=20,in=250] (E);
+    \filldraw[fill=\bgcolor,draw=black] (E) circle[radius=2pt];
+    % YELLOW BACKGROUND
+    % 
+    % \filldraw[fill=red,draw=black] (bgtop) circle[radius=1pt];
+    % \filldraw[fill=red,draw=black] (bgbottom) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgleft) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgright) circle[radius=1pt];
+    % \filldraw[fill opacity=0,draw=black] (O) circle[radius=2pt];
+    \begin{scope}[on background layer]
+      \node [background, fit= (bgleft) (bgright) (bgtop) (bgbottom)] {};
+    \end{scope}
+  \end{tikzpicture}
+  \caption{A string attached to a d-brane is not a manifold.}
+  \label{fig:mf-dbrane-string}
+\end{figure}
+
+
+\subsection{Terminology review}
+\begin{itemize}
+\item The open set $U$ and the map $x$ is called a chart
+  \[
+    (U,x) \text{ is a chart of } (M,\symcal{O}_M)
+  \]
+\item An atlas $\symcal{A}$ of the topological manifold is a possibly huge collection of charts
+  with the condition that the union of all the chart domains give the manifold $M$
+  \[
+    \symcal{A} = \set{(U_{(\alpha)},x_{(\alpha)} | \alpha\in A}
+    \text{ is called an atlas if } M = \bigcup_{\alpha\in A} U_\alpha
+  \]
+  $\alpha$ is just a label, which comes from an arbitrary index set $A$.
+\item A chart map is one which takes any open set in the manifold into a subset of $\symbb{R}^d$
+  \[
+    x : U \longrightarrow x(U)\subseteq\symbb{R}^d
+    \text{ is a chart map}
+  \]
+  
+  The map image of any point $p$ in the open set is a d-tuple
+  \[
+    x(p) = \left(x^1(p), x^2(p),\cdots,x^d(p)\right)
+    \text{ where }
+    x^i : U \longrightarrow \symbb{R}
+    \hspace{1em}
+    i = 1, 2, \cdots, d
+  \]
+  So the map $x$ give the same information as $d$-many maps $x^i$.
+  The $x^i$ are called the \emph{coordinate maps}
+  \[
+    \left.
+      \begin{array}{c}
+        x^1 : U \longrightarrow \symbb{R}\\
+        x^2 : U \longrightarrow \symbb{R}\\
+        \cdots\\
+        x^d : U \longrightarrow \symbb{R}
+      \end{array}
+    \right\}
+    \iff
+    x : U \longrightarrow \symbb{R}^d
+  \]
+  
+  The surface of the Earth is two dimensional, so we can print charts on sheets of paper.
+  Unfortunately you cannot print an atlas of spacetime on sheets of paper. You need to print it
+  on four-dimensional sheets of paper, which mathematically we can do but practically we can't.
+  
+\item If $p$ is any point in the open set $U$ ($p\in U$), then:
+  \vspace{-4ex}
+  \begin{center}
+    \begin{tabular}{l}
+      $x^1$ is the first coordinate of point $p$ with respecto to the chosen chart $(U,x)$\\
+      $x^2$ is the second coordinate of point $p$ with respecto to the chosen chart $(U,x)$\\
+      $\cdots$
+    \end{tabular}
+  \end{center}
+  
+  It is very important to understand what is the real world and what is a concept in our head.
+  In physics, topological manifolds and their open sets are part of the \emph{real world}.
+  But charts have nothing to do with physics, they are only in our heads, although they may be
+  very useful. An atlas is extremely useful, but nobody would say that, because the publisher
+  prints an atlas upside-down, it would be less comfortable to live in that part of the world.
+  
+  An atlas is something imagined. Most of undergraduate physics students tend to confuse what
+  is imagined and what is real. It took three years to Einstein to clarify this. Possibly it
+  could take us three days, so that's excellent.
+  
+  This is a key point. We know from lagrangian mechanics, that if we have a physical system
+  that moves in a configuration space, we can choose generalized coordinates. Choosing
+  coordinates is like choosing charts. A stone thrown around here is not affected by how I
+  imagine charts or if we deform them more or less.
+\end{itemize}
+
+\subsubsection{Example}
+First, we must understand that $\symbb{R}^2$ is just a set. For example, if $\set{1,2,3,4}$
+is a set, then element permutations like $\set{2,1,4,3}$ or $\set{3,4,1,2}$ represent the same
+set. Many people think of the a subset of $M\subseteq\symbb{R}^2$ as a piece of paper sheet,
+but they should not. Instead, imagine that we take that sheet of paper, then rip it appart and
+grind it into powder, put it in a box, shake it, and inside we have a better image for
+$\symbb{R}^2$ (at least a subset of it).
+
+But if we give it a little more structure. For example, if we equip it with the standard
+topology $(M,\theta_{\text{std}}|_M)$, then we could take this topological space like a rubber
+sheet. We could deform it the way we like but we could not rip it appart because it would be
+non-continuous. So the $\symbb{R}^2$ that we usually think of is, at least, a topological
+space with the standard topology. If we add more structure, a dot product, then we could
+measure lengths and distances, and our image of the subset of $\symbb{R}^2$ would be that of
+a rigid plane which we couldn't deform.
+
+Now we take for the real world the points in $\symbb{R}^2$. We are now going to chart these
+points except the origin, $U=\symbb{R}^2\setminus\set{(0,0)}$, for example:
+\[
+  \begin{array}{rcl}
+    x : U & \longrightarrow & x(U)\subset\symbb{R}^2\\
+    (m,n) & \longmapsto & (-m,-n)
+  \end{array}
+\]
+which is represented in figure~\ref{fig:mf-cartesian-chart-map-example}.
+\begin{figure}[ht]
+  \def\scl{.75}
+  % 
+  % Rectangle
+  \pgfmathsetmacro{\RECLENGTH}{3.5}
+  \pgfmathsetmacro{\RECHEIGHT}{3.0}
+  \pgfmathsetmacro{\RECX}{-1.4}
+  \pgfmathsetmacro{\RECY}{-1.5}
+  % F base X and Y coordinates
+  \pgfmathsetmacro{\FBASEX}{.25}
+  \pgfmathsetmacro{\FBASEY}{.55}
+  % F's vertical bar length
+  \pgfmathsetmacro{\FHEIGHT}{.5}
+  % F's relative medium position (0-1)
+  \pgfmathsetmacro{\MED}{.55}
+  % F's top horizontal bar length
+  \pgfmathsetmacro{\FTOPLENGTH}{.4}
+  % F's medium horizontal bar length
+  \pgfmathsetmacro{\FMEDLENGTH}{.32}
+  % MAP ORIGIN
+  \pgfmathsetmacro{\MAPORIGX}{6.0}
+  \pgfmathsetmacro{\MAPORIGY}{-2.0}
+  % MAP x length
+  \pgfmathsetmacro{\MAPXLENGTH}{2.0}
+  \pgfmathsetmacro{\MAPNXLENGTH}{.5}
+  % MAP y length
+  \pgfmathsetmacro{\MAPYLENGTH}{2.0}
+  \pgfmathsetmacro{\MAPNYLENGTH}{.5}
+  % Background
+  \pgfmathsetmacro{\BGTOP}{2.0}
+  \pgfmathsetmacro{\BGBOTTOM}{-3.6}
+  \pgfmathsetmacro{\BGRIGHT}{9.0}
+  \pgfmathsetmacro{\BGLEFT}{-2.0}
+  \centering
+  \begin{tikzpicture}[%
+    scale=\scl,
+    R2/.style={%
+      fill=green!50,draw=black,dotted,
+    },
+    letter/.style={%
+      line width=1.8pt,
+      draw=black,
+    },
+    arrow/.style={%
+      -{Latex[round]},shorten >=2pt, shorten <=1pt,draw=black!40,
+    },
+    background/.style={%
+      line width=\bgborderwidth,
+      draw=\bgbordercolor,
+      fill=\bgcolor,
+    },
+    ]
+    % COORDINATES
+    % Origin
+    \coordinate (O) at (0,0);
+    % R2
+    \coordinate (bl) at (\RECX, \RECY);
+    \coordinate (tl) at (\RECX,\RECY+\RECHEIGHT);
+    \coordinate (br) at (\RECX+\RECLENGTH,\RECY);
+    \coordinate (tr) at (\RECX+\RECLENGTH,\RECY+\RECHEIGHT);
+    \path (bl) -- (tl) coordinate[pos=.15] (R2);
+    % F
+    \coordinate (Fbase) at (\FBASEX,\FBASEY);
+    \path (Fbase) -- +(up:\FHEIGHT) coordinate (Ftop);
+    \path (Fbase) -- +(up:\FHEIGHT) coordinate[pos=\MED] (Fmed);
+    % Map
+    \coordinate (Omap) at (\MAPORIGX,\MAPORIGY);
+    \coordinate (Fbasemap) at ($(Omap) + (-\FBASEX,-\FBASEY)$);
+    \path (Fbasemap) -- +(down:\FHEIGHT) coordinate (Ftopmap);
+    \path (Fbasemap) -- +(down:\FHEIGHT) coordinate[pos=\MED] (Fmedmap);
+    % Background coordinates
+    \coordinate (bgtop) at (0,\BGTOP);
+    \coordinate (bgleft) at (\BGLEFT,0);
+    \coordinate (bgright) at (\BGRIGHT,0);
+    \coordinate (bgbottom) at (0,\BGBOTTOM);
+    % DRAWING
+    % R2
+    \filldraw[R2] (bl) rectangle (tr);
+    \node[right=2pt] at (R2) {\small $\symbb{R}^2$};
+    % F domain
+    % F's vertical and top horizontal lines
+    \draw[letter] (Fbase) -- (Ftop) -- +(right:\FTOPLENGTH) coordinate (FtopRight);
+    % F's horizontal medium line
+    \draw[letter] (Fmed) -- +(right:\FMEDLENGTH) coordinate (FmedRight);
+    % Origin
+    \filldraw[fill=\bgcolor,draw=black] (O) circle [radius=1.5pt];
+    \node[below right=0pt and -4pt] at (O) {$\scriptscriptstyle (0,0)$};
+    % MAP
+    % Map axes
+    \draw[->] (Omap) -- +(right:\MAPXLENGTH) node[below] {\scriptsize $x^1(p)$};
+    \draw (Omap) -- +(left:\MAPNXLENGTH);
+    \draw[->] (Omap) -- +(up:\MAPYLENGTH) node[left] {\scriptsize $x^2(p)$};
+    \draw (Omap) -- +(down:\MAPNYLENGTH);
+    % Map origin
+    \filldraw[fill=black,draw=black] (Omap) circle [radius=.5pt];
+    % Map F
+    \draw[letter] (Fbasemap) -- (Ftopmap) -- +(left:\FTOPLENGTH) coordinate (FtopRightmap);
+    \draw[letter] (Fmedmap) -- +(left:\FMEDLENGTH) coordinate (FmedRightmap);
+    \filldraw[fill=\bgcolor,draw=black] (Omap) circle [radius=1.5pt];
+    % Arrows
+    \draw[arrow] (FmedRight) to[bend left] (FmedRightmap);
+    \draw[arrow] (Ftop) to[out=40,in=0] node[above=5pt,pos=.35] {\small $x$} (Ftopmap);
+    % YELLOW BACKGROUND
+    % 
+    % \filldraw[fill=red,draw=black] (bgtop) circle[radius=1pt];
+    % \filldraw[fill=red,draw=black] (bgbottom) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgleft) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgright) circle[radius=1pt];
+    % \filldraw[fill opacity=0,draw=black] (O) circle[radius=2pt];
+    \begin{scope}[on background layer]
+      \node [background, fit= (bgleft) (bgright) (bgtop) (bgbottom)] {};
+    \end{scope}
+  \end{tikzpicture}
+  \caption{A chart map $(U,x)$ from $\symbb{R}^2\setminus\set{(0,0)}$ into itself, $x(U)$.}
+  \label{fig:mf-cartesian-chart-map-example}
+\end{figure}
+
+In physics, we always ignore the real world. We only talk about charts representing it.
+This is like placing little flags on the real world points with something like
+``coordinate (1,2)'' on them and so on. Putting flags on every point of a real world zone is
+inventing a chart map. But even if we \emph{invert} or distort $x(U)$ in our chart map, the
+real world remains unaffected.
+
+Let us take for the real world the set $\symbb{R}^2$, and consider a different chart map on
+another domain, like $U = \symbb{R}^2 \setminus\set{(m,0)|m\in\symbb{R}_0^+}$, where we take
+out the $m\geq 0$ from $\symbb{R}^2$
+\[
+  \begin{array}{rcl}
+    y : U & \longrightarrow & x(U)\subset\symbb{R}^2\\
+    (m,n) & \longmapsto & \left(\sqrt{m^2+n^2},\arctan{\left(\dfrac{n}{m}\right)}\right)
+  \end{array}
+\]
+where the first coordinate is the distance from the origin and the second one is the angle which
+forms the position vector with the $x$ axes.
+Now we draw a circle, the result can be seen in figure~\ref{fig:mf-polar-chart-map-example}.
+
+Charts may look very different from the real world. We need to know how the charts are
+related to the real world.
+
+\begin{figure}[ht]
+  \def\scl{.75}
+  % Rectangle
+  \pgfmathsetmacro{\RECLENGTH}{3.5}
+  \pgfmathsetmacro{\RECHEIGHT}{3.5}
+  \pgfmathsetmacro{\RECX}{-1.4}
+  \pgfmathsetmacro{\RECY}{-1.5}
+  % R2 ORIGIN
+  \pgfmathsetmacro{\ORIGX}{\RECX + .5*\RECLENGTH}
+  \pgfmathsetmacro{\ORIGY}{\RECY + .5*\RECHEIGHT}
+  \pgfmathsetmacro{\ORIGRADIUS}{1.5}
+  % MYCIRCLE
+  \pgfmathsetmacro{\MYCIRCLERADIUS}{.95}
+  % MAP ORIGIN
+  \pgfmathsetmacro{\MAPORIGX}{4.2}
+  \pgfmathsetmacro{\MAPORIGY}{-1.0}
+  % MAP x length
+  \pgfmathsetmacro{\MAPXLENGTH}{5.2}
+  \pgfmathsetmacro{\MAPNXLENGTH}{0}
+  % MAP y length
+  \pgfmathsetmacro{\MAPYLENGTH}{2.5}
+  \pgfmathsetmacro{\MAPNYLENGTH}{0}
+  % 
+  \pgfmathsetmacro{\MAPIMAGELENGTH}{2.9}
+  \pgfmathsetmacro{\MAPIMAGEHEIGHT}{1.2}
+  % Infinity arrows length
+  \pgfmathsetmacro{\MAPINFTYARROWLENGTH}{.90}
+  \pgfmathsetmacro{\INFTYPOS}{\MAPINFTYARROWLENGTH + .2}
+  % MAP circle image
+  \pgfmathsetmacro{\MAPCIRCLERELPOS}{.4}
+  % Background
+  \pgfmathsetmacro{\BGTOP}{2.6}
+  \pgfmathsetmacro{\BGBOTTOM}{-2.2}
+  \pgfmathsetmacro{\BGRIGHT}{10.3}
+  \pgfmathsetmacro{\BGLEFT}{-2.0}
+  \centering
+  \begin{tikzpicture}[%
+    scale=\scl,
+    R2/.style={%
+      fill=green!40,draw=black,dotted,
+    },
+    mycircle/.style={%
+      black, line width=1pt,
+    },
+    auxiliary line/.style={%
+      fill=\bgcolor,
+      draw=\bgcolor,
+      ultra thin,
+    },
+    open end circle/.style={%
+      fill=\bgcolor,
+      draw=black,
+      ultra thin,
+    },
+    infinity arrow/.style={%
+      -{Latex[round]},
+      green!90,
+    },
+    arrow/.style={%
+      -{Latex[round]},shorten >=2pt, shorten <=1pt,draw=black!40,
+    },
+    background/.style={%
+      line width=\bgborderwidth,
+      draw=\bgbordercolor,
+      fill=\bgcolor,
+    },
+    ]
+    % COORDINATES
+    % R2
+    \coordinate (bl) at (\RECX, \RECY);
+    \coordinate (tl) at (\RECX,\RECY+\RECHEIGHT);
+    \coordinate (br) at (\RECX+\RECLENGTH,\RECY);
+    \coordinate (tr) at (\RECX+\RECLENGTH,\RECY+\RECHEIGHT);
+    \path (bl) -- (tl) coordinate[pos=.15] (R2);
+    % Origin
+    \coordinate (O) at (\ORIGX,\ORIGY);
+    \coordinate (Otop) at ($(O) + (0,\ORIGRADIUS pt)$);
+    \coordinate (Obottom) at ($(O) - (0,\ORIGRADIUS pt)$);
+    % Intersections
+    \path [name path=topaux] (Otop) -- +(right:10);
+    \path [name path=bottomaux] (Obottom) -- +(right:10);
+    \path [name path=recright] ($(br)-(.02pt,0)$) -- ($(tr)-(.02pt,0)$);
+    \path [name intersections={of=topaux and recright,by=T}];
+    \path [name intersections={of=bottomaux and recright,by=B}];
+    \path [name path=mycircle] (O) circle[radius=\MYCIRCLERADIUS];
+    \path [name intersections={of=mycircle and topaux,by=CT}];
+    \path [name intersections={of=mycircle and bottomaux,by=CB}];
+    % Map
+    \coordinate (Omap) at (\MAPORIGX,\MAPORIGY);
+    \coordinate (mapx) at (\MAPORIGX+\MAPIMAGELENGTH,\MAPORIGY);
+    \coordinate (mapy) at (\MAPORIGX,\MAPORIGY+\MAPIMAGEHEIGHT);
+    \coordinate (mapxy) at (\MAPORIGX+\MAPIMAGELENGTH,\MAPORIGY+\MAPIMAGEHEIGHT);
+    % 
+    \coordinate (mapcirclebottom) at ($(Omap)!\MAPCIRCLERELPOS!(mapx)$);
+    \coordinate (mapcircletop) at ($(mapy)!\MAPCIRCLERELPOS!(mapxy)$);
+    % Background coordinates
+    \coordinate (bgtop) at (0,\BGTOP);
+    \coordinate (bgleft) at (\BGLEFT,0);
+    \coordinate (bgright) at (\BGRIGHT,0);
+    \coordinate (bgbottom) at (0,\BGBOTTOM);
+    % 
+    % DRAWING
+    % R2
+    \filldraw[R2] (bl) rectangle (tr);
+    \node[right=2pt] at (R2) {\small $\symbb{R}^2$};
+    % mycircle
+    \draw[mycircle] (O) circle[radius=\MYCIRCLERADIUS];
+    % my circle's auxiliary lines
+    \filldraw[auxiliary line] (Obottom) rectangle (T);
+    \draw[\bgcolor,very thick] (T) -- (B);
+    \filldraw[open end circle] (CT) circle[radius=.62*\ORIGRADIUS pt];
+    \filldraw[open end circle] (CB) circle[radius=.62*\ORIGRADIUS pt];
+    % Origin
+    \filldraw[fill=\bgcolor,draw=black] (O) circle [radius=\ORIGRADIUS pt];
+    % \node[below left=0pt and -4pt] at (O) {$\scriptscriptstyle (0,0)$};
+    % 
+    % MAP
+    % Map axes
+    \draw[->] (Omap) -- +(right:\MAPXLENGTH) node[below=2pt] {\scriptsize $x^1(p)$};
+    \draw (Omap) -- +(left:\MAPNXLENGTH);
+    \draw[->] (Omap) -- +(up:\MAPYLENGTH) node[left] {\scriptsize $x^2(p)\,(\si{\radian})$};
+    \draw (Omap) -- +(down:\MAPNYLENGTH);
+    % Chart map
+    \filldraw[fill=green!40,draw=green!40] (Omap) rectangle (mapxy);
+    \draw[dotted,black] (Omap) -- (mapy);
+    \draw[dotted,black] (Omap) -- (mapx);
+    \draw[dotted,black] (mapy) -- (mapxy);
+    \foreach \y in {.20,.40,...,.80}
+    \draw[infinity arrow] ($(mapx)!\y!(mapxy)$) -- +(right:\MAPINFTYARROWLENGTH);
+    
+    \node[right=\INFTYPOS,\greentext] at ($(mapx)!.5!(mapxy)$) {\small $\infty$};
+    % Circle image
+    \draw[mycircle] (mapcirclebottom) -- (mapcircletop);
+    \filldraw[open end circle] (mapcirclebottom) circle[radius=.7*\ORIGRADIUS pt];
+    \filldraw[open end circle] (mapcircletop) circle[radius=.7*\ORIGRADIUS pt];
+    % Map origin
+    \filldraw[fill=\bgcolor,draw=black] (Omap) circle [radius=\ORIGRADIUS pt];
+    % Values
+    \node[left] at (mapy) {\footnotesize $2\pi$};
+    % Arrows
+    % \draw[arrow] (FmedRight) to[bend left] (FmedRightmap);
+    % \draw[arrow] (Ftop) to[out=20,in=0] node[above=5pt,pos=.35] {\small $x$} (Ftopmap);
+    
+    % YELLOW BACKGROUND
+    % 
+    % \filldraw[fill=red,draw=black] (bgtop) circle[radius=1pt];
+    % \filldraw[fill=red,draw=black] (bgbottom) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgleft) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgright) circle[radius=1pt];
+    % \filldraw[fill opacity=0,draw=black] (O) circle[radius=2pt];
+    \begin{scope}[on background layer]
+      \node [background, fit= (bgleft) (bgright) (bgtop) (bgbottom)] {};
+    \end{scope}
+  \end{tikzpicture}
+  \caption{A chart map $(U,y)$ which uses something like polar coordinates, from
+    $U=\symbb{R}^2\setminus\set{(0,0)}$ into $y(U)\subset\symbb{R}^2$, in which we can see a
+    circle drawn in the real world and its image on the chart map.}
+  \label{fig:mf-polar-chart-map-example}
+\end{figure}
+
+\subsection{Chart transition maps}
+These are objects derived from certain charts we already have, which are heavily used by
+physicists.
+
+Imagine two charts $(U,x)$ and $(V,y)$ with overlapping regions, so $U\cap V \neq\emptyset$.
+So $U$ and $V$ come with some chart maps which take any point in the set to some point in
+$\symbb{R}^d$. The charts have a little overlap in order for us to navigate through them.
+
+Now we are going to restrict the $x$ and $y$ maps to the intersection region $U\cap V$
+and their images $x(U\cap V)$ and $y(U\cap V)$ with dark green in
+figure~\ref{fig:mf-chart-transition-maps-one}.
+
+\begin{figure}[ht]
+  \def\scl{.7}
+  % 
+  % Plane (bottom left)
+  \pgfmathsetmacro{\PLANEBLX}{-3.0}
+  \pgfmathsetmacro{\PLANEBLY}{-.5}
+  % Plane (bottom right)
+  \pgfmathsetmacro{\PLANEBRX}{2.1}
+  \pgfmathsetmacro{\PLANEBRY}{-.8}
+  % Plane (top left)
+  \pgfmathsetmacro{\PLANETLX}{-1.5}
+  \pgfmathsetmacro{\PLANETLY}{2.0}
+  % Plane (top right)
+  \pgfmathsetmacro{\PLANETRX}{3.0}
+  \pgfmathsetmacro{\PLANETRY}{2.0}
+  % M text 
+  \pgfmathsetmacro{\MX}{3.4}
+  \pgfmathsetmacro{\MY}{1.9}
+  % Ellipse a
+  \pgfmathsetmacro{\EAX}{-.67}
+  \pgfmathsetmacro{\EAY}{.80}
+  \pgfmathsetmacro{\EAA}{.93}
+  \pgfmathsetmacro{\EAB}{.60}
+  \def\ellipseA{(\EAX,\EAY) ellipse (\EAA cm and \EAB cm)}
+  % Ellipse b
+  \pgfmathsetmacro{\EBX}{.40}
+  \pgfmathsetmacro{\EBY}{.73}
+  \pgfmathsetmacro{\EBA}{1.2}
+  \pgfmathsetmacro{\EBB}{.73}
+  \def\ellipseB{(\EBX,\EBY) ellipse (\EBA cm and \EBB cm)}
+  % U and V text
+  \pgfmathsetmacro{\UX}{-1.73}
+  \pgfmathsetmacro{\UY}{.20}
+  \pgfmathsetmacro{\VX}{1.30}
+  \pgfmathsetmacro{\VY}{-.1}
+  % Coordinate system (common)
+  \pgfmathsetmacro{\ORIGRADIUS}{1.0}
+  \pgfmathsetmacro{\ORIGY}{-5.0}
+  \pgfmathsetmacro{\XAXISLENGTH}{4.0}
+  \pgfmathsetmacro{\YAXISLENGTH}{3.2}
+  % Left coordinate system
+  \pgfmathsetmacro{\LORIGX}{-4.0}
+  % Right coordinate system
+  \pgfmathsetmacro{\RORIGX}{3.0}
+  % Background
+  \pgfmathsetmacro{\BGTOP}{2.8}
+  \pgfmathsetmacro{\BGBOTTOM}{-6.0}
+  \pgfmathsetmacro{\BGRIGHT}{8.0}
+  \pgfmathsetmacro{\BGLEFT}{-5.5}
+  \centering
+  \begin{tikzpicture}[%
+    scale=\scl,
+    R2/.style={%
+      fill=green!40,draw=black,dotted,
+    },
+    open set/.style={%
+      fill=green!17,draw=\bgcolor,
+    },
+    intersection1/.style={%
+      fill=green!60,draw=green!17,
+    },
+    intersection2/.style={%
+      fill=green!60,draw=black,
+    },
+    arrow/.style={%
+      -{Latex[round]},shorten >=2pt, shorten <=1pt,draw=black!40,
+    },
+    origin/.style={%
+      fill=black, draw=black,
+    },
+    axis/.style={%
+      ->,
+    },
+    arrow/.style={%
+      -{Latex[round]},shorten >=2pt, shorten <=2pt,draw=black!40,
+    },
+    background/.style={%
+      line width=\bgborderwidth,
+      draw=\bgbordercolor,
+      fill=\bgcolor,
+    },
+    ]
+    % 
+    % COORDINATES
+    % Plane
+    \coordinate (bl) at (\PLANEBLX,\PLANEBLY);
+    \coordinate (br) at (\PLANEBRX,\PLANEBRY);
+    \coordinate (tl) at (\PLANETLX,\PLANETLY);
+    \coordinate (tr) at (\PLANETRX,\PLANETRY);
+    % M text
+    \coordinate (M) at (\MX,\MY);
+    % Ellipses a and b
+    \coordinate (EA) at (\EAX,\EAY);
+    \coordinate (EB) at (\EBX,\EBY);
+    % U and V text
+    \coordinate (U) at (\UX,\UY);
+    \coordinate (V) at (\VX,\VY);
+    % Left coordinate system
+    \coordinate (LO) at (\LORIGX,\ORIGY);
+    \coordinate (LX) at (\LORIGX+\XAXISLENGTH,\ORIGY);
+    \coordinate (LY) at (\LORIGX,\ORIGY+\YAXISLENGTH);
+    % Right coordinate system
+    \coordinate (RO) at (\RORIGX,\ORIGY);
+    \coordinate (RX) at (\RORIGX+\XAXISLENGTH,\ORIGY);
+    \coordinate (RY) at (\RORIGX,\ORIGY+\YAXISLENGTH);
+    % Point p
+    \coordinate (p) at (-.35,.76);
+    \coordinate (xp) at (-2.9,-3.2);
+    \coordinate (yp) at (4.2,-3.4);
+    % Background coordinates
+    \coordinate (bgtop) at (0,\BGTOP);
+    \coordinate (bgleft) at (\BGLEFT,0);
+    \coordinate (bgright) at (\BGRIGHT,0);
+    \coordinate (bgbottom) at (0,\BGBOTTOM);
+    % 
+    % DRAWING
+    % Plane and text
+    \filldraw[dotted,fill=black!17,draw=black] (bl)
+    to[out=50,in=260] (tl) to[out=350,in=185] (tr)
+    to[bend right] (br) to[out=170,in=10] cycle;
+    \draw[dotted] (bl)
+    to[out=50,in=260] (tl) to[out=350,in=185] (tr)
+    to[bend right] (br) to[out=170,in=10] cycle;
+    \node at (M) {\footnotesize $M$};
+    % Ellipses and text
+    \filldraw[open set] \ellipseA;
+    \node at (U) {\footnotesize $U$};
+    \filldraw[open set] \ellipseB;
+    \node at (V) {\footnotesize $V$};
+    \begin{scope}[even odd rule]
+      \clip \ellipseA;
+      \filldraw[intersection1] \ellipseB;
+    \end{scope}
+    \draw[dotted] \ellipseA;
+    \draw[dotted] \ellipseB;
+    % Intersection text
+    \node[\greentext] at (0,1.63) {\scriptsize $U\cap V$};
+    % Left coordinate system
+    \filldraw[origin] (LO) circle[radius=\ORIGRADIUS pt];
+    \draw[axis] (LO) -- (LX);
+    \draw[axis] (LO) -- (LY);
+    % Right coordinate system
+    \filldraw[origin] (RO) circle[radius=\ORIGRADIUS pt];
+    \draw[axis] (RO) -- (RX);
+    \draw[axis] (RO) -- (RY);
+    % x(U)
+    \begin{scope}
+      \filldraw[dotted,open set] (-3.2,-2.9) to[bend left] (-2.2,-2.7)
+      to [bend left] (-1.3,-3.7) to[bend left] (-1.4,-4.0) to[bend left] (-2.8,-4.4)
+      to[bend left] (-3.42,-3.4) to[bend left] cycle;
+      \draw[dotted] (-3.2,-2.9) to[bend left] (-2.2,-2.7) to [bend left] (-1.3,-3.7)
+      to[bend left] (-1.4,-4.0) to[bend left] (-2.8,-4.4) to[bend left] (-3.42,-3.4)
+      to[bend left] cycle;
+    \end{scope}
+    % Intersection on x(U)
+    \begin{scope}
+      \clip (-3.2,-2.9) to[bend left] (-2.2,-2.7) to [bend left] (-1.3,-3.7)
+      to[bend left] (-1.4,-4.0) to[bend left] (-2.8,-4.4) to[bend left] (-3.42,-3.4)
+      to[bend left] cycle;
+      % x(intersection)
+      \filldraw[dotted,intersection1] plot [smooth cycle] coordinates{%
+        (-3.72,-2.65)
+        (-2.72,-2.65) (-2.4,-3.0) (-2.43,-3.3) (-2.65,-3.7) (-3.2,-4.07)
+        (-3.72,-4.07)};
+      \draw[dotted] plot [smooth cycle] coordinates{%
+        (-3.72,-2.65)
+        (-2.72,-2.65) (-2.4,-3.0) (-2.43,-3.3) (-2.65,-3.7) (-3.2,-4.07)
+        (-3.72,-4.07)};
+      \draw[dotted] (-3.2,-2.9) to[bend left] (-2.2,-2.7) to [bend left] (-1.3,-3.7)
+      to[bend left] (-1.4,-4.0) to[bend left] (-2.8,-4.4) to[bend left] (-3.42,-3.4)
+      to[bend left] cycle;
+    \end{scope}
+    % y(V)
+    \begin{scope}
+      \clip (3.8,-4.3) to[out=0,in=165] (5.8,-4.5)
+      to[out=100,in=260] (6.0,-3.0) to[out=195,in=20] (4.0,-3.2) to cycle;
+      \filldraw[open set] (3.8,-4.3) to[out=0,in=165] (5.8,-4.5)
+      to[out=100,in=260] (6.0,-3.0) to[out=195,in=20] (4.0,-3.2) to cycle;
+      \draw[dotted] (3.8,-4.3) to[out=0,in=165] (5.8,-4.5)
+      to[out=100,in=260] (6.0,-3.0) to[out=195,in=20] (4.0,-3.2) to cycle;
+      %% Intersection on Y(V)
+      \filldraw[intersection1]
+      (3.4,-4.3) to (3.8,-4.3) to[out=60,in=220] (4.4,-3.5) to[out=40,in=215] (6.0,-3.0)
+      to (3.4,-3.0) -- cycle;
+      \draw[\bgcolor] (3.8,-4.3) to[out=0,in=165] (5.8,-4.5)
+      to[out=100,in=260] (6.0,-3.0) to[out=195,in=20] (4.0,-3.2) to cycle;
+    \end{scope}
+    \draw[dotted] (3.8,-4.3) to[out=0,in=165] (5.8,-4.5)
+    to[out=100,in=260] (6.0,-3.0) to[out=195,in=20] (4.0,-3.2) to cycle;
+    % Point p in the intersection
+    \filldraw (p) circle[radius=.9pt];
+    \node[above=-1pt] at (p) {\scriptsize $p$};
+    \filldraw (xp) circle[radius=.9pt];
+    \filldraw (yp) circle[radius=.9pt];
+    % Arrows
+    \draw[arrow] (p) to[bend left] node[pos=.55,above left] {\small $x$} (xp);
+    \draw[arrow] (p) to[bend right] node[pos=.5,above right] {\small $y$} (yp);
+    % x(U) and x(instersection)
+    \node[\greentext] at (-3.1,-2.4) {\scriptsize $x\,(U\cap V)$};
+    \node at (-1.2,-4.5) {\scriptsize $x\,(U)$};
+    % y(U) and y(instersection)
+    \node[\greentext] at (5.0,-2.7) {\scriptsize $y\,(U\cap V)$};
+    \node at (6.5,-4.3) {\scriptsize $y\,(U)$};
+    % Chart transition map arrow
+    % \draw[arrow] (xp) to[bend right] node[pos=.6,below] {\small $y\circ x^{-1}$} (yp);
+    \draw[arrow,shorten >=5pt,line width=1.2pt]
+    (xp) to[out=345,in=195] node[below] {\small $y\circ x^{-1}$} (yp);
+    % 
+    % YELLOW BACKGROUND 
+    % \filldraw[fill=red,draw=black] (bgtop) circle[radius=1pt];
+    % \filldraw[fill=red,draw=black] (bgbottom) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgleft) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgright) circle[radius=1pt];
+    % \filldraw[fill opacity=0,draw=black] (O) circle[radius=2pt];
+    \begin{scope}[on background layer]
+      \node [background, fit= (bgleft) (bgright) (bgtop) (bgbottom)] {};
+    \end{scope}      
+  \end{tikzpicture}
+  \caption{$y\circ x^{-1}$ is the chart transition map, which translates the coordinates of
+    $p\in U\cup V$ from map $(U,x)$ to the other $(V,y)$.}
+  \label{fig:mf-chart-transition-maps-one}
+\end{figure}
+
+Now imagine that we are studying the map $x(U)$, and when we are interested in point $p$ in the
+intersection of $U$ and $V$. Point $p$ is mapped as $x(p)$ in the chart map $(U,x)$.
+Then we would like to move to the chart $(V,y)$ map, and locate the point $y(p)$ in it.
+In other words, it is often very useful to translate the coordinates of $p$ in the $(U,x)$
+chart map to the ones of the same point in the $(V,y)$ map.
+
+This can be achieved with the map $y\circ x^{-1}$ ($y$ \emph{after} $x$ \emph{inverse})
+applied to point $p$
+\[
+  (y\circ x^{-1})\,(p) = y\, (x^{-1} \,(p))
+\]
+Note that $x$ is invertible\footnotemark{}, so $x^{-1}\,(p)$ represents the point $p$ in the
+real world.
+\footnotetext{Both, $x$ and $y$ are invertible by definition of chart map, and in both directions
+  continuous. The inverse $y^{-1}$ would be necessary translating the coordinates from
+  $y\kern1pt(p) $ to $x\kern1pt (p)$.}
+
+The manifold picture can be represented formally as
+\vspace{-1ex}
+\begin{center}
+  \def\dist{.6}
+  \begin{tikzcd}
+    & U\cap V \arrow[dl,"x" above left=0pt and 0pt,shift right=\dist ex]
+    \arrow[dr,"y" above right=0pt and 0pt] & \\
+    \symbb{R}^d\supseteq x\,(U\cap V)
+    \arrow[ur, "x^{-1}" below right=-2pt and 0pt, shift right=\dist ex]
+    \arrow{rr}[below] {y\,\circ\kern.8pt x^{-1}}
+    &   &
+    y\,(U\cap V)\subseteq\symbb{R}^d
+  \end{tikzcd}
+\end{center}
+where both $x\,(U\cap  V)$ and $y\,(U\cap V)$ are open subsets of $\symbb{R}^d$.
+This chart transition map $y\circ x^{-1}$ is continuous because both $x$ and $y$ are
+continuous and the composition of continuous maps (remember the end of the last chapter)
+is also continuous.
+
+$U\cap V$ represents the real world, but $x\,(U\cap V)$ and $y\,(U\cap V)$ are just imaginations.
+The chart transition map is $y\circ x^{-1}$, defined as 
+\begin{center}
+  \def\dist{.6}
+  \begin{tikzcd}
+    x\,(U\cap V)\arrow{rr}[below] {y\,\circ\kern.8pt x^{-1}}
+    &   &
+    y\,(U\cap V)
+  \end{tikzcd}
+\end{center}
+When physicists talk about a change of coordinates, let's say, between cartesian to spherical
+coordinates, they never touch the real world $U\cap V$ as mathematical object. They only work
+with chart maps, which are just imaginations.
+
+This can lead us to the philosophical problem of. somehow, imagining that there is some reality
+to the coordinates of points. We can even think of cartesian coordinates as being
+real, and the others being not so real (so we could name the others as
+\emph{generalized coordinates} for a reason.)
+But this means nothing. The real world doesn't care whether we use cartesian coordinates or
+any other or whether we look at one chart $(U,x)$ or to another chart $(V,x)$.
+They are just notions that we invent to represent the real world.
+This is something that took Einstein three years to fully understand.
+He seemed to understood it, but not completely, which was wrong. We need to understand it
+\SI{100}{\percent}.
+
+Informally, but a good way to think of it, chart transition maps contain the instructions to glue
+together the different charts of an atlas, see figure~\ref{fig:mf-chart-transition-maps-two}.
+\begin{figure}[ht]
+  \def\scl{1}
+  % Rectangles
+  \pgfmathsetmacro{\RECWIDTH}{2.8}
+  \pgfmathsetmacro{\RECHEIGHT}{1.8}
+  \pgfmathsetmacro{\RECGAP}{.5}
+  \pgfmathsetmacro{\RECTXT}{.5*\RECWIDTH}
+  % Ghost rectangle
+  \pgfmathsetmacro{\GHOSTRECWIDTH}{1.0}
+  \pgfmathsetmacro{\GHOSTRECHEIGHT}{\RECHEIGHT}
+  % Dots in the ghost rectangle
+  \pgfmathsetmacro{\DOTSNUM}{3}
+  \pgfmathsetmacro{\DOTS}{\DOTSNUM - 1}
+  \pgfmathsetmacro{\DOTSXSHIFT}{\GHOSTRECWIDTH / \DOTS}
+  \pgfmathsetmacro{\DOTSYSHIFT}{\GHOSTRECHEIGHT / 2}
+  \pgfmathsetmacro{\DOTRADIUS}{.6}
+  % Background
+  \pgfmathsetmacro{\BGTOP}{2.6}
+  \pgfmathsetmacro{\BGBOTTOM}{-1.0}
+  \pgfmathsetmacro{\BGRIGHT}{11.3}
+  \pgfmathsetmacro{\BGLEFT}{-.4}
+  %
+  \centering
+  \begin{tikzpicture}[%
+    scale=\scl,
+    dot/.style={%
+      fill=black!70, draw=black!70,
+    },
+    chart/.style={%
+      fill=black!10,draw=black!10,
+    },
+    open set/.style={%
+      fill=green!17,draw=black,dotted,
+    },
+    arrow/.style={%
+      -{Latex[round]},shorten >=2pt, shorten <=2pt,draw=black!50,
+    },
+    background/.style={%
+      line width=\bgborderwidth,
+      draw=\bgbordercolor,
+      fill=\bgcolor,
+    },
+    ]
+    % COORDINATES
+    \coordinate (O) at (0,0);
+    % Plane 1
+    \coordinate (p1bl) at (O);
+    \coordinate (p1tr) at ($(p1bl) + (\RECWIDTH,\RECHEIGHT)$);
+    \coordinate (p1txt) at ($(p1bl) + (\RECTXT,\RECHEIGHT)$);
+    % Plane 2
+    \coordinate (p2bl) at ($(p1tr) + (\RECGAP,-\RECHEIGHT)$);
+    \coordinate (p2tr) at ($(p2bl) + (\RECWIDTH,\RECHEIGHT)$);
+    \coordinate (p2txt) at ($(p2bl) + (\RECTXT,\RECHEIGHT)$);
+    % Ghost plane
+    \coordinate (pgbl) at ($(p2tr) + (\RECGAP,-\RECHEIGHT)$);
+    \coordinate (pgtr) at ($(pgbl) + (\GHOSTRECWIDTH,\GHOSTRECHEIGHT)$);
+    % Plane 3
+    \coordinate (p3bl) at ($(pgtr) + (\RECGAP,-\RECHEIGHT)$);
+    \coordinate (p3tr) at ($(p3bl) + (\RECWIDTH,\RECHEIGHT)$);
+    \coordinate (p3txt) at ($(p3bl) + (\RECTXT,\RECHEIGHT)$);
+    % Background coordinates
+    \coordinate (bgtop) at (0,\BGTOP);
+    \coordinate (bgleft) at (\BGLEFT,0);
+    \coordinate (bgright) at (\BGRIGHT,0);
+    \coordinate (bgbottom) at (0,\BGBOTTOM);
+    % DRAWING
+    % Chart 1 and text
+    \filldraw[chart] (p1bl) rectangle (p1tr);
+    \node[above] at (p1txt) {\small Chart 1};
+    % Chart 2 and text
+    \filldraw[chart] (p2bl) rectangle (p2tr);
+    \node[above] at (p2txt) {\small Chart 2};
+    % Ghost plane (dots)
+    \foreach \n in {0,...,\DOTS}{%
+      \filldraw[dot] ($(pgbl) + (\n * \DOTSXSHIFT,\DOTSYSHIFT)$) circle[radius=\DOTRADIUS pt];
+    }
+    % Chart 3 and text
+    \filldraw[chart] (p3bl) rectangle (p3tr);
+    \node[above] at (p3txt) {\small Chart n};
+    % chart 1
+    \begin{scope}[shift=(p1bl)]
+      \clip (p1bl) rectangle (p1tr);
+      % Zone 1
+      \filldraw[open set] plot [smooth cycle] coordinates{%
+        (.4,.8) (.5,1.2) (.9,1.4) (1.3,1.1) (.9,.7)
+      };
+      % Zone 2
+      \filldraw[open set] plot [smooth cycle] coordinates{%
+        (1.8,.3) (1.9,.7) (2.2,1.0) (2.5,1.05) (3.1,0.9) (3.1,.5) (2.5,.25) (2.2,.2)
+      };
+      % Point p in zone 2
+      \filldraw (2.2,.45) circle [radius=.6pt] coordinate (p1);
+      \node[above] at (p1) {\scriptsize $p$};
+    \end{scope}
+    \begin{scope}[shift=(p2bl)]
+      \clip (p2bl) rectangle (p2tr);
+      % Zone 1
+      \filldraw[open set] plot [smooth cycle,xshift=-1cm] coordinates{%
+        (.4,.8) (.5,1.2) (.9,1.4) (1.3,1.1) (.9,.7)
+      };
+      % Zone 2
+      \filldraw[open set] plot [smooth cycle,xshift=-1cm] coordinates{%
+        (1.8,.3) (1.9,.7) (2.2,1.0) (2.5,1.05) (3.1,.9) (3.1,.5) (2.5,.25) (2.2,.2)
+      };
+      % Point p in zone 2
+      \filldraw[xshift=-1cm] (2.2,.45) circle [radius=.6pt] coordinate (p2)
+      node[above] {\scriptsize $p$};
+      % Zone 3
+      \filldraw[open set] plot [smooth cycle,xshift=-1cm] coordinates{%
+        (3.5,1.4) (3.7,1.5) (3.9,1.45) (4.2,1.35) (4.0,1.20) (3.8,1.1)
+      };
+    \end{scope}
+    \begin{scope}[shift=(p3bl)]
+      % Zone 4
+      \filldraw[open set] plot [smooth cycle,xshift=-1cm] coordinates{%
+        (2.1,1.6) (2.8,1.55) (3.0,1.5) (2.9,1.2) (3.2,.8) (2.5,.5) (1.9,1.1)
+      };
+    \end{scope}
+    % Plane 1
+    \draw[black!17] (p1bl) rectangle (p1tr);
+    \draw[dotted] (p1bl) rectangle (p1tr);
+    % Plane 2
+    \draw[black!17] (p2bl) rectangle (p2tr);
+    \draw[dotted] (p2bl) rectangle (p2tr);
+    % Plane 3
+    \draw[black!17] (p3bl) rectangle (p3tr);
+    \draw[dotted] (p3bl) rectangle (p3tr);
+    % Arrow
+    \draw[arrow] (p1) to[out=280,in=260] node[below] {\footnotesize $y\circ x^{-1}(p)$} (p2);
+    % 
+    % YELLOW BACKGROUND 
+    % \filldraw[fill=red,draw=black] (bgtop) circle[radius=1pt];
+    % \filldraw[fill=red,draw=black] (bgbottom) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgleft) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgright) circle[radius=1pt];
+    % \filldraw[fill opacity=0,draw=black] (O) circle[radius=2pt];
+    \begin{scope}[on background layer]
+      \node [background, fit= (bgleft) (bgright) (bgtop) (bgbottom)] {};
+    \end{scope}      
+  \end{tikzpicture}
+  \caption{A chart transition map contains the instructions how to glue together the charts
+  of an atlas, which overlap a little so that we can navigate across its different charts.}
+  \label{fig:mf-chart-transition-maps-two}
+\end{figure}
+
+Imagine you are the captain of a ship with no windows to see the real world. It's a long cruise and
+you have nothing to do, so you are bored. You have a single-sided printed atlas of the world,
+you then pull out the charts and decide to glue together the charts in the overlapped regions
+with the help of chart transition maps (the gluing instructions). When finished, you get
+a paper model of a sphere, topologically speaking.
+
+Chart transition maps have all the information about the real world globally.
+This is why chart maps and chart transition maps are so beloved by physicists, because they
+globally represent the real world.
+Only when we glue together the different charts of a atlas of the Earth, for example,  with chart
+transition maps, we get a sphere. If we understood the charts by themselves, with no chart transition
+maps, we could not have inferred that the Earth is like a sphere.
+
+% 01:00:00
+\subsection{Manifold philosophy}
+Now we come to a very important point. What is the whole philosophy of writing down manifolds?
+We will only understand this once we start discussing differentiability of curves and functions.
+So far we have only talked about continuity ---no jumps---, but differentiability of curves mean
+that everywhere there is a tangent, roughly speaking.
+
+\subsubsection{Continuity}
+Let's first focus our discussion on continuity.
+The basic idea is the following:
+The navigator of a ship can see the bubbles that the ship creates in the sea when it moves.
+He also have an atlas of the real world. So he puts the course of the ship in the charts.
+Would you be surprised if, all of a sudden, this course would jump to another point and
+continue from there? You would be very much surprised, so you would ask: ``How did you do that?''
+
+What is the argument that you would make to explain that this is unusual? You know that the map
+from the real world to the chart is bijective and continuous, and that for the charts they have
+chosen the standard topology in $\symbb{R}^2$, etc., so the discontinuity of the curve in the
+charts is the image of the discontinuity of the curve in the real world.
+
+So instead of defining continuity directly in the real world, which of course you can, because the
+real world is a topological space and you can define continuity in curves, you could push the real
+world object you want to study down to a chart, study the object in the chart, and then you get the
+idea of the property in the real world from the one you have studied in the chart.
+
+\begin{quote}
+  ``Often it is desirable (or indeed the only way) to define properties (like continuity, etc.) of
+  real world objects (for instance a curve $\gamma$ in the real world,
+  $\symbb{R} \overset{\gamma}{\longrightarrow} M$) by judging suitable conditions not on
+  the real world object itself, but on a chart-representative of that real world object.''
+\end{quote}
+
+The advantage of the an approach are that the course of the ship in the real world is a curve from
+some real parameter into $M$.
+Now we choose an open subset $U$ of $M$, which has a portion $\gamma$ of the  curve.
+\[
+  \symbb{R} \overset{\gamma}{\longrightarrow} M
+\]
+Next, we invent a chart $(U,x)$ which takes the $\gamma$ curve and maps this curve into the chart
+which might look as in figure~\ref{fig:mf-curve-chart}.
+\begin{figure}[ht]
+  \def\scl{.7}
+  % Coordinate system (common)
+  \pgfmathsetmacro{\ORIGRADIUS}{.6}
+  \pgfmathsetmacro{\ORIGX}{-3.0}
+  \pgfmathsetmacro{\ORIGY}{-4.0}
+  \pgfmathsetmacro{\XAXISLENGTH}{6.0}
+  \pgfmathsetmacro{\YAXISLENGTH}{3.5}
+  % X(U)
+  \pgfmathsetmacro{\XUWIDTH}{2.9}
+  \pgfmathsetmacro{\XUHEIGHT}{2}
+  \pgfmathsetmacro{\XUORIGX}{.8}
+  \pgfmathsetmacro{\XUORIGY}{.5}
+  % Curve on x(U) initial point
+  \pgfmathsetmacro{\XUCURVEINITX}{.8}
+  \pgfmathsetmacro{\XUCURVEINITY}{2.1}
+  \pgfmathsetmacro{\XUCURVEENDX}{3.2}
+  \pgfmathsetmacro{\XUCURVEENDY}{.5}
+  % Background
+  \pgfmathsetmacro{\BGTOP}{2.0}
+  \pgfmathsetmacro{\BGBOTTOM}{-4.8}
+  \pgfmathsetmacro{\BGRIGHT}{4.0}
+  \pgfmathsetmacro{\BGLEFT}{-4.0}
+  % 
+  \centering
+  \begin{tikzpicture}[%
+    scale=\scl,
+    manifold/.style={%
+      fill=black!10,draw=black!10,
+    },
+    chart/.style={%
+      fill=black!10,draw=black!10,
+    },
+    open set/.style={%
+      fill=green!17,draw=black,dotted,
+    },
+    origin/.style={%
+      fill=black, draw=black,
+    },
+    axis/.style={%
+      ->,
+    },
+    xU/.style={%
+      rounded corners=8pt,
+      dotted,
+      fill=green!17, draw=black,
+    },
+    arrow/.style={%
+      -{Latex[round]},shorten >=1pt, shorten <=1pt,draw=black!40,
+    },
+    background/.style={%
+      line width=\bgborderwidth,
+      draw=\bgbordercolor,
+      fill=\bgcolor,
+    },
+    ],
+    % 
+    % COORDINATES
+    % Coordinate system
+    \coordinate (O) at (\ORIGX,\ORIGY);
+    \coordinate (X) at (\ORIGX+\XAXISLENGTH,\ORIGY);
+    \coordinate (Y) at (\ORIGX,\ORIGY+\YAXISLENGTH);
+    % X(U) rectangle
+    \coordinate (xUbl) at ($(O) + (\XUORIGX,\XUORIGY)$);
+    \coordinate (xUtr) at ($(xUbl) + (\XUWIDTH,\XUHEIGHT)$);
+    \filldraw[red] (1.0,.55) circle[radius=.2pt];
+    \filldraw[red] (1.86,.91) circle[radius=.2pt];
+    % gamma curve initial and end points
+    \coordinate (UcurveInit) at (1.0,.55);
+    \coordinate (UcurveEnd) at (1.86,.91);
+    % X(gamma) curve initial and end points
+    \coordinate (xUcurveInit) at ($(O) + (\XUCURVEINITX,\XUCURVEINITY)$);
+    \coordinate (xUcurveEnd) at ($(O) + (\XUCURVEENDX,\XUCURVEENDY)$);
+    % Background coordinates
+    \coordinate (bgtop) at (0,\BGTOP);
+    \coordinate (bgleft) at (\BGLEFT,0);
+    \coordinate (bgright) at (\BGRIGHT,0);
+    \coordinate (bgbottom) at (0,\BGBOTTOM);
+    % 
+    % DRAWING
+    % Manifold
+    \draw[manifold] plot [smooth cycle] coordinates{%
+      (.55,-.05) (.4,.5) (.9,1.2) (1.6,1.5) (2.6,1.4) (2.9,.8) (2.3,-.1) (1.3,-.4)
+    };
+    \begin{scope}
+      % U filled
+      \filldraw[open set] plot [smooth cycle]
+      coordinates{%
+        (1.0,.5) (1.05,.8) (1.2,1.1) (1.5,1.15) (1.85,1.0) (1.8,.6) (1.5,.35) (1.2,.3)
+      };
+      % Clipping U
+      \clip plot [smooth cycle]
+      coordinates{%
+        (1.0,.5) (1.05,.8) (1.2,1.1) (1.5,1.15) (1.85,1.0) (1.8,.6) (1.5,.35) (1.2,.3)
+      };
+      % Curve with arrow head inside
+      % \draw[sloped,allow upside down] plot [smooth] coordinates{%
+      % (.6,.5) (.8,.6) (1.0,.55) (1.4,.61) (1.75,.85) (2.0,.95) (2.2,.9)
+      % }[arrow inside={end=Straight Barb,opt={black,line width=.5pt,scale=1.15}}{.63}];
+      \draw[sloped,allow upside down] plot [smooth] coordinates{%
+        (.6,.5) (.8,.6) (1.0,.55) (1.4,.61) (1.75,.85) (2.0,.95) (2.2,.9)
+      }[arrow inside={end=Straight Barb,opt={black,line width=.5pt,scale=.95}}{.63}];
+    \end{scope}
+    % Manifold border
+    \draw[dotted] plot [smooth cycle] coordinates{%
+      (.55,-.05) (.4,.5) (.9,1.2) (1.6,1.5) (2.6,1.4) (2.9,.8) (2.3,-.1) (1.3,-.4)
+    };
+    % U border
+    \draw[dotted] plot [smooth cycle]
+    coordinates{%
+      (1.0,.5) (1.05,.8) (1.2,1.1) (1.5,1.15) (1.85,1.0) (1.8,.6) (1.5,.35) (1.2,.3)
+    };
+    % gamma text
+    \node at (1.28,.8) {\scriptsize $\gamma$};
+    % U text
+    \node[\greentext] at (1.4,0) {\footnotesize $U$};
+    % M text
+    \node at (.3,1.0) {\small $M$};
+    % Chart
+    % Coordinate system
+    \filldraw[origin] (O) circle[radius=\ORIGRADIUS pt];
+    \draw[axis] (O) -- (X);
+    \draw[axis] (O) -- (Y);
+    % x(U)
+    \filldraw[xU] (xUbl) rectangle (xUtr);
+    % Curve with arrow head inside
+    \begin{scope}[shift=(xUcurveInit)]
+      \draw[sloped,allow upside down] plot[smooth] coordinates{%
+        (0,-.01) (.5,.1) (1.0,.05) (1.5,-.15) (2.0,-.6) (2.23,-1.0) (2.35,-1.3) (2.4,-1.6)
+      }[arrow inside={end=Straight Barb,opt={black,line width=.5pt,scale=1.15}}{.6}];
+    \end{scope}
+    % x o gamma text
+    \node at (-1.15,-2.25) {\scriptsize $x\circ\gamma$};
+    % x(U) text
+    % \node[\greentext] at (1.70,-1.9) {\footnotesize $x(U)\subseteq\symbb{R}^d$};
+    \node[\greentext] at (-.3,-1.2) {\footnotesize $x(U)\subseteq\symbb{R}^d$};
+    % Arrows
+    \draw[arrow] (UcurveInit) to[out=240,in=80] node[above] {\footnotesize $x$} (xUcurveInit);
+    \draw[arrow] (UcurveEnd) to[bend left] (xUcurveEnd);
+    % 
+    % YELLOW BACKGROUND 
+    % \filldraw[fill=red,draw=black] (bgtop) circle[radius=1pt];
+    % \filldraw[fill=red,draw=black] (bgbottom) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgleft) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgright) circle[radius=1pt];
+    % \filldraw[fill opacity=0,draw=black] (O) circle[radius=2pt];
+    \begin{scope}[on background layer]
+      \node [background, fit= (bgleft) (bgright) (bgtop) (bgbottom)] {};
+    \end{scope}
+  \end{tikzpicture}
+  \caption{The curve $x\circ\gamma$ is the representation of the original curve $\gamma$ in a
+    subset $U$ of the manifold $M$ into the chart $(U,x)$.}
+  \label{fig:mf-curve-chart}
+\end{figure}
+
+This can also be represented formally as
+%\vspace{-1ex}
+\begin{center}
+  \begin{tikzcd}[cramped]
+    \symbb{R}\arrow[r,"\gamma" above] \arrow[dr,end anchor={[xshift=-.5em]},"x\circ\gamma" below left]
+    & U\subseteq M
+    \arrow[d,start anchor={[xshift=-1.2em]},end anchor={[xshift=-1.2em]},"x" right, pos=.35]\\
+    & \hspace{.6em}x(U)\subseteq\symbb{R}^d
+  \end{tikzcd}
+\end{center}
+where $x\circ y$ is a composite map.
+
+So, instead of looking at the curve $\gamma$ in the real world, you could study the curve on the
+chart $x\circ\gamma$, which goes from a real parameter into a part of $\symbb{R}^d$.
+In undergraduate physics, this is called the trajectory of a particle in $\symbb{R}^3$, or
+something
+\vspace{-3ex}
+\begin{center}
+  \begin{equation}\label{eq:mf-chart-map-xgamma}
+    \begin{tikzcd}[cramped]
+      \symbb{R}\arrow[r,"x\circ\gamma" above] & x(U)\subseteq\symbb{R}^d
+    \end{tikzcd}
+  \end{equation}
+\end{center}
+
+This is only the chart representative of the curve $\gamma$ in the real world.
+If we could prove that the trajectory $x\circ\gamma$ in the chart is continuous, then the real
+trajectory $\gamma$ would also be continuous. This way we could define some property, like
+continuity, of an object in the real world by judging the continuity of the image of the object
+in a chart that represents it. This would be and advantage because we could use undergraduate
+analysis in charts.
+
+But we need to ensure that this works. I mean, the $x$ map is just a product of our imagination
+or, even worse, superstition, so the chart may be ill-defined and we could not infer properties
+of the real world from products of our imagination, like $x\circ\gamma$.
+In the following diagram we have drawn in red these fantasy bits
+%\vspace{-1ex}
+\begin{center}
+  \begin{tikzcd}[cramped]
+    \symbb{R}
+    \arrow[r,"\gamma" above]
+    \arrow[dr,"x\circ\textcolor{black}{\gamma}" below left,red]
+    & U \arrow[d,"x" right,pos=.40,red]\\
+    & \textcolor{red}{x}(U)
+  \end{tikzcd}
+\end{center}
+
+So we need to prove that this works \emph{for every chart map we could invent}.
+Imagine two chart maps $(U,x)$ and $(U,y)$
+\vspace{-5ex}
+\begin{center}
+  \begin{equation}\label{eq:mf-chart-maps-x-y-continuity}
+    \begin{tikzcd}[cramped]
+      & y(U)\\
+      \symbb{R}
+      \arrow[ur,"y\circ\gamma" above left]
+      \arrow[r,"\gamma" above]
+      \arrow[dr,"x\circ\gamma" below left]
+      & U \arrow[u,"y" right,pos=.40] \arrow[d,"x" right,pos=.40]\\
+      & x(U)
+    \end{tikzcd}
+  \end{equation}
+\end{center}
+
+We then need to ensure that the defined property does not change if we choose another chart map.
+In particular, we have to prove that the same properties can be deduced from whatever map
+$x$ or $y$ we could invent. Then, instead of going directly from $\symbb{R}$ to $x(U)$ through
+$x\circ\gamma$ as in~(\ref{eq:mf-chart-maps-x-y-continuity}), we start from the $y\circ\gamma$,
+then $y^{-1}$, and finally $x$. If we get the same result $x\circ\gamma$ as in the direct road,
+then we would be sure that this method is chart independent
+\vspace{-1ex}
+\[
+  x \circ y^{-1} \circ (y\circ\gamma)
+  = x \circ (y^{-1}\circ y) \circ\gamma
+  = x \circ I \circ \gamma
+  = x\circ \gamma
+\]
+where $I$ is the identity map and the composition of continuous maps is continuous.
+So this ensures us that this is chart independent.
+
+But there is a danger in the $(U,x)$ chart map. We might start confusing what an object in the
+real world is, as it happened to Einstein.
+
+\subsubsection{Differentiability}
+With a topology on the manifold and the standard topology in $\symbb{R}^d$, we could study
+continuity of the curve, on both the chart map and on the manifold.
+But there may be cases where we need more structure than that.
+
+Unlike continuity, in order to define differentiability we need more structure than a topology.
+We cannot define differentiability at the manifold level. It can be done only at the chart level.
+Suppose we have $x\circ\gamma$, which is a map from $\symbb{R}$ into $\symbb{R}^d$
+%\vspace{-1ex}
+\[
+  x\circ\gamma : \symbb{R} \longrightarrow \symbb{R}^d
+\]
+and we would like to define differentiability for the real world curve $\gamma$ in the manifold,
+based on the differentiability of $x\circ\gamma$ in the chart.
+
+In order to study differentiability we need to define addition and multiplication (we need to
+substract and divide). It can be easily done for $x\circ\gamma$ in $\symbb{R}^d$ as we learned in
+undergraduate real analysis.
+
+Now we have a problem.
+We know from the continuity definition of the curve in the real world, that the definition
+in the manifold ought to be chart independent, but now this doesn't work with differentiability.
+Continuity is preserved, but the chart transition map $y\circ x^{-1}$, see
+equation~(\ref{eq:mf-chart-maps-x-y-differentiability}), does not necessarily keep
+differentiability.
+The chart transition map $y\circ x^{-1}$ can turn a nice smooth curve $x\circ\gamma$ into another
+one $y\circ\gamma$ with an edge, which is continuous but there is no unique tangent at the edge.
+\vspace{-3ex}
+\begin{center}
+  \begin{equation}\label{eq:mf-chart-maps-x-y-differentiability}
+    \begin{tikzcd}[cramped]
+      & y(U)\\
+      \symbb{R}
+      \arrow[ur,"y\kern.3pt\circ\gamma" above left]
+      \arrow[r,"\gamma" above]
+      \arrow[dr,"x\circ\gamma" below left]
+      & U \arrow[u,"y" right,pos=.40] \arrow[d,"x" right,pos=.40]\\
+      & x(U) \arrow[uu,out=20,in=340,"y\kern.8pt\circ x^{-1}" right]
+    \end{tikzcd}
+  \end{equation}
+\end{center}
+
+This is because $y\circ\gamma$ is not guaranteed to be differentiable because of the $x^{-1}$ term in
+the chart transition map $y\circ x^{-1}$ which is only guaranteed to be continuous.
+If we have a differentiable function, $x\circ\gamma$, and we compose it with a continuous function,
+$y\circ x^{-1}$ the result is only guaranteed to be continuous, not differentiable.
+See figure~\ref{fig:mf-curve-failed-differentiation}.
+
+%This is because, when the curve $x\circ\gamma$ is differentiable, $y\circ\gamma$ is not guaranteed
+%to be differentiable because the chart transition map $y\circ x^{-1}$ only guarantees
+%continuity. The inverse of a differentiable map is not necessarily differentiable.
+
+\begin{figure}[ht]
+  \def\scl{1}
+  % Open end radius
+  \pgfmathsetmacro{\OPENENDRADIUS}{1}
+  % Background
+  \pgfmathsetmacro{\BGTOP}{1.8}
+  \pgfmathsetmacro{\BGBOTTOM}{-1.0}
+  \pgfmathsetmacro{\BGRIGHT}{4.3}
+  \pgfmathsetmacro{\BGLEFT}{-.7}
+  \centering
+  \begin{tikzpicture}[%
+    scale=\scl,
+    open end circle/.style={%
+      fill=\bgcolor,
+      draw=black,
+      ultra thin,
+    },
+    arrow/.style={%
+      -{Latex[round]},shorten >=1pt, shorten <=1pt,draw=black!50,
+    },
+    background/.style={%
+      line width=\bgborderwidth,
+      draw=\bgbordercolor,
+      fill=\bgcolor,
+    },
+    ]
+    % COORDINATES
+    \coordinate (A1) at (0,0);
+    \coordinate (B1) at (.5,1);
+    \coordinate (C1) at (1,1.5);
+    \coordinate (A2) at (2,0);
+    \coordinate (B2) at (2.5,1);
+    \coordinate (C2) at (3.6,1.5);
+    % Background coordinates
+    \coordinate (bgtop) at (0,\BGTOP);
+    \coordinate (bgleft) at (\BGLEFT,0);
+    \coordinate (bgright) at (\BGRIGHT,0);
+    \coordinate (bgbottom) at (0,\BGBOTTOM);
+    % DRAWING
+    %
+    % First curve
+    \draw (A1) to[out=0,in=260] (B1)
+    node[sloped,below left=2pt and 2pt] {\footnotesize $x\circ\gamma$} to[out=80,in=260] (C1)
+    [arrow inside={end=Straight Barb,opt={black,line width=.5pt,scale=.95}}{.5}];
+    \filldraw[open end circle] (A1) circle[radius=\OPENENDRADIUS pt];
+    % \filldraw[red] (B1) circle[radius=.5pt];
+    \filldraw[open end circle] (C1) circle[radius=\OPENENDRADIUS pt];
+    %
+    % Second curve 
+    \draw (A2) to[out=20,in=270] (B2)
+    node[sloped,below left=2pt and 2pt] {\footnotesize $y\circ\gamma$}  to[out=-20,in=260] (C2)
+    [arrow inside={end=Straight Barb,opt={black,line width=.5pt,scale=.95}}{.25}]
+    [arrow inside={end=Straight Barb,opt={black,line width=.5pt,scale=.95}}{.75}];
+    \filldraw[open end circle] (A2) circle[radius=\OPENENDRADIUS pt];
+    \filldraw[red] (B2) circle[radius=1.2pt];
+    \filldraw[black] (B2) circle[radius=.2pt];
+    \filldraw[open end circle] (C2) circle[radius=\OPENENDRADIUS pt];
+    %
+    % Chart transition map
+    \draw[arrow] ($(A1)+(0,-.4)$) -- node[below] {\footnotesize $y\circ x^{-1}$} ($(A2)+(0,-.4)$);
+    % 
+    % YELLOW BACKGROUND 
+    % \filldraw[fill=red,draw=black] (bgtop) circle[radius=1pt];
+    % \filldraw[fill=red,draw=black] (bgbottom) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgleft) circle[radius=1pt];
+    % \filldraw[fill=green,draw=black] (bgright) circle[radius=1pt];
+    % \filldraw[fill opacity=0,draw=black] (O) circle[radius=2pt];
+    \begin{scope}[on background layer]
+      \node [background, fit= (bgleft) (bgright) (bgtop) (bgbottom)] {};
+    \end{scope}
+  \end{tikzpicture}
+%  \caption{Imagine the curve $x\circ\gamma\in x(U)$ on the chart left being smooth enough
+%    (differentiable). The other curve $y\circ\gamma\in y(U)$ on the right, although continuous,
+%    may be non-differentiable (note the red vertex).}
+  \caption{The chart transition map $y\circ x^{-1}$ might turn a nice smooth differentiable curve
+    $x\circ\gamma$, into another one $y\circ\gamma$, with an edge (see the red point) which is
+    not.}
+  \label{fig:mf-curve-failed-differentiation}
+\end{figure}
+
+So it seems that we cannot define differentiability on the manifold through chart maps. But if we
+\emph{restrict chart maps to those whose inverse is differentiable}\footnotemark{} then the chart
+transition map $y\circ x^{-1}$ would be the composition of two differentiable maps, and the result
+would be differentiable.
+So we get an artificially restricted atlas where all the chart transition maps are differentiable
+and then we could define differenciability on the manifold.
+\footnotetext{This is like taking a huge atlas and ripping off the pages that contain chart maps
+  whose inverse is not differentiable.}
+
+A maximal topological atlas is an atlas which contains every chart that can possibly contain
+(lots of redundancy). Then ripping certain charts off give us information (we can send a
+secret message, like \emph{I love you} or something like that).
+Ripping out charts is information, so reducing a maximal atlas by ripping out certain charts that
+make trouble for the notion we want to define (like differentiability) means providing information.
+This additional information is called \emph{the prescription of the differentiable atlas}.
+
+This process of restricting an atlas is a major step for understanding spacetime.
+
+
+
+
+
+  
+  % 1:15:50
+
+
+% janr
+%TORUS IN 3D SHADED
+%\begin{figure}[ht]
+%  \def\scl{1}
+%  \begin{tikzpicture}
+%    % \x runs over the  angles at which to draw the circles defining the torus
+%    \foreach \x in {90,89,...,-90} {%
+%      \pgfmathsetmacro\elrad{20*max(cos(\x),.1)}
+%      \pgfmathsetmacro\ltint{.9*abs(\x-60)/180 - .1}
+%      \pgfmathsetmacro\rtint{.9*(1-abs(\x+60)/180) - .1}
+%      \definecolor{currentcolor}{rgb}{\ltint, \ltint, \ltint}
+%      % Third draws the right-hand circle
+%      \draw[color=currentcolor,fill=currentcolor]
+%      (xyz polar cs:angle=\x,y radius=.75,x radius=1.5)
+%      ellipse (\elrad pt and 20pt);
+%      % This sets the colour correctly for the left-hand circle ...
+%      \definecolor{currentcolor}{rgb}{\rtint, \rtint, \rtint}
+%      % ... and draws it
+%      \draw[color=currentcolor,fill=currentcolor]
+%      (xyz polar cs:angle=180-\x,radius=.75,x radius=1.5)
+%      ellipse (\elrad pt and 20pt);
+%    % End of foreach statement
+%    }
+%  \end{tikzpicture}
+%\end{figure}
+
+%janr - 10:40
+  
+
+  
+
+  
+
+
+
+
+
+
+
+
+%%% Local Variables:
+%%% coding: utf-8
+%%% mode: latex
+%%% TeX-engine: luatex
+%%% TeX-master: "../spacetime.tex"
+%%% End:
+
