@@ -7,14 +7,16 @@
 \chapter{Topological spaces}
 
 \section{Introduction}
-At the coarsest level, spacetime is a set. It just consists of points which are the elements of the
-set. However, this level is not enough to talk even about the simplest notions that we would like to
-talk about in classical phisics, as the notion of continuity of maps.
+At the coarsest level, spacetime is a set. It just consists of points which are the
+elements of the set. However, this level is not enough to talk even about the simplest
+notions that we would like to talk about in Classical Physics, as the notion of
+continuity of maps.
 
-Why would we want to tak about continuity of maps? Well, in classical physics there is the idea of
-curves in which there are no jumps. Some particle is running somewhere and we do not have the
-situation that, all of a sudden, there is a jump and the trajectory of the particle continues
-abruptly in a different place. We do not want that, so we need to require continuity of maps.
+Why would we want to talk about continuity of maps? Well, in Classical Physics there is
+the idea of curves in which there are no jumps. Some particle is running somewhere and
+we do not have the situation that, all of a sudden, there is a jump and the trajectory
+of the particle continues abruptly in a different place. We do not want that, so we need
+to require continuity of maps.
 \begin{figure}[ht]
   \centering
   % Scale
@@ -27,8 +29,9 @@ abruptly in a different place. We do not want that, so we need to require contin
     baseline,
     every node/.style={black,font=\large},
     box/.style={fill=green!50, draw=green!55!black},
-    arrow/.style={{Latex[bend]}-{Latex[bend]}, shorten >=4pt, shorten <=4pt, line width=2.5pt},
-    background/.style={
+    arrow/.style={%
+      {Latex[bend]}-{Latex[bend]}, shorten >=4pt, shorten <=4pt, line width=2.5pt},
+    background/.style={%
       line width=\bgborderwidth,
       draw=\bgbordercolor,
       fill=\bgcolor,
@@ -67,18 +70,22 @@ abruptly in a different place. We do not want that, so we need to require contin
       \node [background, fit= (left) (right) (below) (above)] {};
     \end{scope}
   \end{tikzpicture}
-  \caption{A particle is not allowed to jump all of a sudden from one point to another in classical
-    physics.}
+  \caption{A particle is not allowed to jump all of a sudden from one point to another
+    in Classical Physics.}
   \label{fig:topspac-nojumps}
 \end{figure}
 
-It turns out that a set is not enough structure to be able to talk about curves being continuous or not
-on that set. You could, of course, imagine all kinds of structure on a set that allows you to talk
-about continuity. For instance, you could implement a \emph{distance measure} of some kind.
-But we need to be very minimal and very economic in order to not introduce undue asumptions.
-So \emph{we are interested in the weakest structure that we can establish on a set} which allows
-a good definition of continuity on a set. Mathematicians know the weakest such structure, and it is
-called \emph{a topology}. This is our motivation to study topology in these lectures.
+It turns out that a set is not enough structure to be able to talk about curves being
+continuous or not on that set. You could, of course, imagine all kinds of structure on
+a set that allows you to talk about continuity. For instance, you could implement a
+\emph{distance measure} of some kind.
+But we need to be very minimal and very economic in order to not introduce undue
+asumptions.
+So \emph{we are interested in the weakest structure that we can establish on a set}
+which allows
+a good definition of continuity on a set. Mathematicians know the weakest such
+structure, and it is called \emph{a topology}. This is our motivation to study topology
+in these lectures.
 
 \section{Topology}
 \subsection{Definition}
