@@ -89,12 +89,12 @@ in these lectures.
 
 \section{Topology}
 \subsection{Definition}
-Let $M$ be a set. A \emph{topology}\footnotemark{} $\symcal{O}$ is a subset of the power set of M
+Let $M$ be a set. A \emph{topology}\footnotemark{} $\symcal{O}$ is a subset of the power
+set of M
 \footnotetext{$\symcal{O}$ for \emph{open}.}
 \begin{equation}
   \symcal{O} \subseteq \symcal{P}(M)
 \end{equation}
-
 that satisfies three axioms
 \begin{enumerate}
 \item The empty set and $M$ must be always part of the collection
@@ -107,34 +107,38 @@ that satisfies three axioms
     \forall\, U, V \in\symcal{O}  \Longrightarrow U \cap V \in \symcal{O}
   \end{equation}
   
-\item Given a finite or infinite number of elements in the collection, their union is always in
-  the collection
+\item Given a finite or infinite number of elements in the collection, their union is
+always in the collection
   \begin{equation}
     \forall\, U_\alpha \in \symcal{O}  \Longrightarrow \bigcup_{\alpha\in A} U_\alpha \in \symcal{O}
   \end{equation}
-  where $\alpha \in A$ is an arbitrary index and $A$ is any set, finite, countable infinite or even
-  uncountable. In particular, the set $A$ may be the whole real line, $\symbb{R}$.
+  where $\alpha \in A$ is an arbitrary index and $A$ is any set, finite, countable
+  infinite or even uncountable. In particular, the set $A$ may be the whole real line,
+  $\symbb{R}$.
 \end{enumerate}
 
 \subsection{Comments on the defition of topology}
 \begin{itemize}
-\item The power set $\symcal{P}(M)$ of a set $M$ is the set containing all subsets of $M$.
-  So to get a topology of $M$ you start by choosing a certain subset of the power set of $M$,
-  $\symcal{O} \subseteq\symcal{P}(M)$.
+\item The power set $\symcal{P}(M)$ of a set $M$ is the set containing all subsets of
+  $M$.
+  So to get a topology of $M$ you start by choosing a certain subset of the power set of
+  $M$, $\symcal{O} \subseteq\symcal{P}(M)$.
 \item The empty set and $M$ must be elements of $\symcal{P}(M)$.
 \item The intersection of \emph{any} two sets of $\symcal{O}$ is also in $\symcal{O}$.
   To check for this, you have to check for all $\symcal{O}$ pairs.
-\item The last axiom is deceptively similar to the preceding one. But in this case we are not
-  restricted to check for every pair of elements in $\symcal{O}$, but we can choose any subset
-  of elements of $\symcal{O}$, whether finite, countable-infinite or even uncountable-infinite
-  elements of the power set. In either case, the union of all these elements must also be an
-  element of $\symcal{O}$.
+\item The last axiom is deceptively similar to the preceding one. But in this case we
+  are not restricted to check for every pair of elements in $\symcal{O}$, but we can
+  choose any subset
+  of elements of $\symcal{O}$, whether finite, countable-infinite or even
+  uncountable-infinite
+  elements of the power set. In either case, the union of all these elements must also
+  be an element of $\symcal{O}$.
 \end{itemize}
 
 \subsection{Examples}
 \subsubsection{A first try}
-Let's have a set $M$ that just consists of three elements, $M\equiv\Set{1,2,3}$. We write down
-the entire power set of $M$, just for reference. It has $2^3 = 8$ elements
+Let's have a set $M$ that just consists of three elements, $M\equiv\Set{1,2,3}$. We
+write down the entire power set of $M$, just for reference. It has $2^3 = 8$ elements
 \[
   \symcal{P}(M)
   \equiv \Set{\emptyset, \{1\}, \{2\}, \{3\}, \{1,2\}, \{1,3\}, \{2,3\}, \{1,2,3\}}
@@ -153,30 +157,32 @@ Our subset choice obey the first two axioms, but it fails on the third:
 
 \subsubsection{The simple examples of topology}
 \begin{itemize}
-\item The most simple example of topology of a set $M$ is called the \emph{chaotic topology}, and only
-  contains the empty set and the set
+\item The most simple example of topology of a set $M$ is called the
+  \emph{chaotic topology}, and only contains the empty set and the set
   \[
     \symcal{O}_{\text{chaotic}} \equiv \Set{\emptyset, M}
   \]
   It is very easy to prove that this is a topology.
-\item The other exameple of topology of a set $M$ is the whole power set of $M$. It is called the
-  \emph{discrete topology}
+\item The other example of topology of a set $M$ is the whole power set of $M$. It is
+  called the \emph{discrete topology}
   \[
     \symcal{O}_{\text{discrete}} \equiv \symcal{P}(M)
   \]
-  It is also very easy to prove that this is a topology. The power set contains all subsets of
-  $M$, including $\emptyset$ and $M$. The intersection and union of subsets of the power set is
-  also a subset of $M$.
+  It is also very easy to prove that this is a topology. The power set contains all
+  subsets of $M$, including $\emptyset$ and $M$. The intersection and union of subsets
+  of the power set is also a subset of $M$.
 \end{itemize}
-Pity that these two topologies are utterly useless. It is worth introducing them as they are
-extreme cases (the topology with the minimum and maximum number of elements).
+Pity that these two topologies are utterly useless. It is worth introducing them as they
+are extreme cases (the topology with the minimum and maximum number of elements).
 
 \subsection{Standard topology}
-This is a very important example that will reconcile our intuition aboout continuity built from
-undergraduate analysis courses. The standard topology will be used throughout these lectures.
+This is a very important example that will reconcile our intuition aboout continuity
+built from undergraduate analysis courses. The standard topology will be used throughout
+these lectures.
 
-Contrary to the chaotic and discrete topologies, which can be defined for any set $M$, the standard
-topology can only be defined in $M = \symbb{R}^d$, which is the set of all tuples of the form
+Contrary to the chaotic and discrete topologies, which can be defined for any set $M$,
+the standard topology can only be defined in $M = \symbb{R}^d$, which is the set of all
+tuples of the form
 \[
   M = \symbb{R}^d
   = \underbrace{\symbb{R}\times\symbb{R}\cdots\times\symbb{R}}_{\text{d times}}
@@ -188,44 +194,47 @@ Then, a standard topology is a subset of the power set of $\symbb{R}^d$
   \symcal{O}_{\text{std}} \subseteq \symcal{P}(\symbb{R}^d)
 \]
 
-The standard topology may contain non-countable many elements, so it cannot be defined explicitly.
+The standard topology may contain non-countable many elements, so it cannot be defined
+explicitly.
 
 The definition proceeds in two steps:
 
 \begin{description}
 \item[1. Soft ball definition:]\ 
 
-  A soft ball is a set $B_r(\vvv{p})$ where $p\in\symbb{R}^d$ is a point and $r$ is an element of the
-  positive reals, $r\in\symbb{R}^+$, is called the soft ball radius. You can think of $\vvv{p}$ as the
-  center of the ball
+  A soft ball is a set $B_r(\vvv{p})$ where $p\in\symbb{R}^d$ is a point and $r$ is an
+  element of the positive reals, $r\in\symbb{R}^+$, is called the soft ball radius. You
+  can think of $\vvv{p}$ as the center of the ball
   \begin{equation}\label{eq:tplg-softball}
     B_r(\vvv{p})
     = \Set{(q_1, \cdots, q_d) | \sum_{i=1}^d (q_i - p_i)^2 < r^2}
   \end{equation}
   
-  We might argue that we have written down the Euclidian norm. But in this case it is just a formula.
-  To talk about the Euclidian norm we need a vector space structure and a dot product, which is not
-  necessary the case.
+  We might argue that we have written down the Euclidian norm. But in this case it is
+  just a formula.
+  To talk about the Euclidian norm we need a vector space structure and a dot product,
+  which is not necessary the case.
 
 \item[2. Standard topology definition:]\ 
 
-  $\symcal{O}_{\text{std}}$ is a standard topology if for any $U\in\symcal{O}_{\text{std}}$ and
-  for all $\vvv{p}\in U$, there exists at least one soft ball $B_r(\vvv{p})$ which is included in $U$
-  \begin{equation}
-    \forall U\in\symcal{O}_{\text{std}}, \forall \vvv{p}\in U
-    \Longrightarrow \exists r\in\symbb{R}^+ | B_r(\vvv{p})\subseteq U
-  \end{equation}
+  $\symcal{O}_{\text{std}}$ is a standard topology if for any $U\in\symcal{O}_{\text{std}}$ and for all $\vvv{p}\in U$, there exists at least one soft ball $B_r(\vvv{p})$ which is
+included in $U$
+\begin{equation}
+  \forall U\in\symcal{O}_{\text{std}}, \forall \vvv{p}\in U
+  \Longrightarrow \exists r\in\symbb{R}^+ | B_r(\vvv{p})\subseteq U
+\end{equation}
 \end{description}
 
 \subsubsection{Comments}
 \begin{itemize}
-\item A soft ball, $B_r(\vvv{p})$ in $\symbb{R}^n$ is the multidimensional equivalent of an open
-  interval in $\symbb{R}$. This is because the \emph{less than} relational operator in the
-  definition~\eqref{eq:tplg-softball}. Open intervals in $\symbb{R}$ do not include their endpoints,
-  whereas closed intervals include them. Accordingly, a soft ball consists only of \emph{inner points}
-  and does not include the points in its surface, although we can get as near as we like to it.
-  In figure~\eqref{fig:topspac-softball-closedball} we represent both, a soft ball and a closed
-  ball, in a $\symbb{R}^2$ plane.
+\item A soft ball, $B_r(\vvv{p})$ in $\symbb{R}^n$ is the multidimensional equivalent of
+  an open interval in $\symbb{R}$. This is because the \emph{less than} relational
+  operator in the definition~\eqref{eq:tplg-softball}. Open intervals in $\symbb{R}$ do
+  not include their endpoints, whereas closed intervals include them. Accordingly, a
+  soft ball consists only of \emph{inner points} and does not include the points in its
+  surface, although we can get as near as we like to it.
+  In figure~\eqref{fig:topspac-softball-closedball} we represent both, a soft ball and a
+  closed ball, in a $\symbb{R}^2$ plane.
   \begin{figure}[ht]
     \def\scl{1}
     % 
@@ -285,31 +294,35 @@ The definition proceeds in two steps:
         \node [background, fit= (BOTTOMLEFT) (TOPRIGHT)] {};
       \end{scope}
     \end{tikzpicture}
-    \caption{To the left there is a soft ball $B_r(\vvv{p})$, and to the right we find a closed ball.}
+    \caption{%
+      To the left there is a soft ball $B_r(\vvv{p})$, and to the right we find a closed
+      ball.}
     \label{fig:topspac-softball-closedball}
   \end{figure}
 
-\item It's a simple exercise to prove that this two step definition of the standard topology satisfies
- the three axioms of a topology. We leave this task to the reader.
+\item It's a simple exercise to prove that this two step definition of the standard
+ topology satisfies the three axioms of a topology. We leave this task to the reader.
   
-\item We can think of a standard topology $\theta_{\text{std}}$ in a very simple and graphical way.
-  Let $U$ be any set in the topology, $U\subseteq\theta_{\text{std}}$. It can be proved that this
-  leads to the fact that $U$ has no border, much like a soft ball. For this reason, any set belonging
-  to the standard topology is also called as an \emph{open set}.
+\item We can think of a standard topology $\theta_{\text{std}}$ in a very simple and
+  graphical way.
+  Let $U$ be any set in the topology, $U\subseteq\theta_{\text{std}}$. It can be proved
+  that this leads to the fact that $U$ has no border, much like a soft ball. For this
+  reason, any set belonging to the standard topology is also called as an
+  \emph{open set}.
   We will define more properly an open set very soon.
 
-  On the left side of picture~\ref{fig:topspac-openset} a possible set of a standard topology is
-  shown. We can see its border as a non-continuous line, meaning that all its elements are
-  \emph{inner points}.
+  On the left side of picture~\ref{fig:topspac-openset} a possible set of a standard
+  topology is shown. We can see its border as a non-continuous line, meaning that all
+  its elements are \emph{inner points}.
   
   According to the definition of standard topology, \emph{for every point} $p$ in any
-  $U\in\theta_{\text{std}}$ we can find at least one soft ball centered in this point that it is
-  included in $U$.
-  On the right side of the same figure an arbitrary set $U$ of this topology and two arbitrary
-  points $p_1$ and $p_2$ are shown. $U$ is an element of $\theta_{\text{std}}$ because
-  we can find a soft ball of small enough radius centered on any point of the set that is completely
-  inside $U$. If the point is extremely near the border, the radius of the soft ball must be also
-  extremely small.
+  $U\in\theta_{\text{std}}$ we can find at least one soft ball centered in this point
+  that it is included in $U$.
+  On the right side of the same figure an arbitrary set $U$ of this topology and two
+  arbitrary points $p_1$ and $p_2$ are shown. $U$ is an element of $\theta_{\text{std}}$
+  because we can find a soft ball of small enough radius centered on any point of the
+  set that is completely inside $U$. If the point is extremely near the border, the
+  radius of the soft ball must be also extremely small.
   \begin{figure}[ht]
     \def\scl{1}
     % 
@@ -364,9 +377,11 @@ The definition proceeds in two steps:
       \begin{tikzpicture}[%
         scale = \scl,
         use Hobby shortcut,
-        open set/.style={fill=green!50, draw=green!70!black, dashed, closed, line width=.8pt},
-        closed set/.style={fill=green!50, draw=green!40!black, solid, closed, line width=.8pt},
-        background/.style={
+        open set/.style={%
+          fill=green!50, draw=green!70!black, dashed, closed, line width=.8pt},
+        closed set/.style={%
+          fill=green!50, draw=green!40!black, solid, closed, line width=.8pt},
+        background/.style={%
           line width=\bgborderwidth,
           draw=\bgbordercolor,
           fill=\bgcolor,
@@ -412,15 +427,18 @@ The definition proceeds in two steps:
       \begin{tikzpicture}[%
         scale = \scl,
         use Hobby shortcut,
-        open set/.style={fill=green!50, draw=green!70!black, dashed, closed, line width=.8pt},
-        closed set/.style={fill=green!50, draw=green!40!black, solid, closed, line width=.8pt},
+        open set/.style={%
+          fill=green!50, draw=green!70!black, dashed, closed, line width=.8pt},
+        closed set/.style={%
+          fill=green!50, draw=green!40!black, solid, closed, line width=.8pt},
         point/.style={fill=black!50, draw=black, radius=.3pt},
-        soft ball/.style={fill=green!80!black, draw=black, densely dotted, line width=.5pt},
-        background/.style={
+        soft ball/.style={%
+          fill=green!80!black, draw=black, densely dotted, line width=.5pt},
+        background/.style={%
           line width=\bgborderwidth,
           draw=\bgbordercolor,
           fill=\bgcolor,
-        },      
+        },
         ]
         % COORDINATES
         % Points
@@ -470,16 +488,16 @@ The definition proceeds in two steps:
     \end{minipage}
     \caption{On the left side, a possible set of the standard topology is represented.
       We see that the boundary doesn't belong to the set (roughly speaking).
-      On the right side we suggest that for any point of $U$, we could find a radius small enough such
-      that the soft ball $B_r(\vvv{p})$ lies entirely in the set $U$.}
+      On the right side we suggest that for any point of $U$, we could find a radius
+      small enough such that the soft ball $B_r(\vvv{p})$ lies entirely in the set $U$.}
     \label{fig:topspac-openset}
   \end{figure}
 
-  In contrast, on the left side of figure~\ref{fig:topspac-nonopen-nonclosed-set} we represent a
-  set $V$ that is not an element of the standard topology. This is because there are some points in
-  its border, marked with a continuous line, that are elements of $V$. To the right of the figure we
-  see that any soft ball ---no matter how small--- around the points in the border are
-  not completely inside $V$.
+  In contrast, on the left side of figure~\ref{fig:topspac-nonopen-nonclosed-set} we
+  represent a set $V$ that is not an element of the standard topology. This is because
+  there are some points in its border, marked with a continuous line, that are elements
+  of $V$. To the right of the figure we see that any soft ball ---no matter how small---
+  around the points in the border are not completely inside $V$.
   \begin{figure}[ht]
     \def\scl{1}
     %
@@ -526,9 +544,11 @@ The definition proceeds in two steps:
       \begin{tikzpicture}[%
         scale = \scl,
         use Hobby shortcut,
-        open set/.style={fill=green!50, draw=green!70!black, dashed, closed, line width=.8pt},
-        closed set/.style={fill=green!50, draw=green!40!black, solid, closed, line width=.8pt},
-        background/.style={
+        open set/.style={%
+          fill=green!50, draw=green!70!black, dashed, closed, line width=.8pt},
+        closed set/.style={%
+          fill=green!50, draw=green!40!black, solid, closed, line width=.8pt},
+        background/.style={%
           line width=\bgborderwidth,
           draw=\bgbordercolor,
           fill=\bgcolor,
@@ -575,16 +595,18 @@ The definition proceeds in two steps:
       \begin{tikzpicture}[%
         scale = \scl,
         use Hobby shortcut,
-        open set/.style={fill=green!50, draw=green!70!black, dashed, closed, line width=.4pt},
-        closed set/.style={fill=green!50, draw=green!40!black, solid, closed, line width=.4pt},
+        open set/.style={%
+          fill=green!50, draw=green!70!black, dashed, closed, line width=.4pt},
+        closed set/.style={%
+          fill=green!50, draw=green!40!black, solid, closed, line width=.4pt},
         point/.style={fill=black!50, draw=black, radius=.3pt},
         inner/.style={fill=green!80!black, draw=black, densely dotted},
         outer/.style={fill=red,draw=black,densely dotted},
-        background/.style={
+        background/.style={%
           line width=\bgborderwidth,
           draw=\bgbordercolor,
           fill=\bgcolor,
-        },      
+        },
         ]
         % COORDINATES
         % Points
@@ -633,70 +655,72 @@ The definition proceeds in two steps:
         \end{scope}
       \end{tikzpicture}
     \end{minipage}  
-    \caption{On the left side of the picture we outline a set $V$ which does not belong to the
-      standard topology, since some points of its border are elements of $V$ (the ones in the solid
-      line).
-      On the right we show a soft ball centered on one point of this border, revealing that some
-      parts of the soft ball, the ones in red, are not in $V$.}
+    \caption{On the left side of the picture we outline a set $V$ which does not belong
+      to the standard topology, since some points of its border are elements of $V$ (the
+      ones in the solid line).
+      On the right we show a soft ball centered on one point of this border, revealing
+      that some parts of the soft ball, the ones in red, are not in $V$.}
     \label{fig:topspac-nonopen-nonclosed-set}
   \end{figure}
   
-\item Although the standard topology is very important, it doesn't mean that it is the only topology.
-  There might be opportunities to equip $M=\symbb{R}^d$ with a different topology if you have other
-  than the standard purposes in mind.
-  Its name is somewhat deceptive, but there is nothing special about the standard topology, other
-  than you like it because you met it at the beginning of your mathematical studies. But there is no
-  reason for spacetime to carry it. Furthermore, it can only be defined in some sets of the form
-  $\symbb{R}^d$.
-
+\item Although the standard topology is very important, it doesn't mean that it is the
+  only topology.
+  There might be opportunities to equip $M=\symbb{R}^d$ with a different topology if you
+  have other than the standard purposes in mind.
+  Its name is somewhat deceptive, but there is nothing special about the standard
+  topology, other than you like it because you met it at the beginning of your
+  mathematical studies. But there is no reason for spacetime to carry it. Furthermore,
+  it can only be defined in some sets of the form $\symbb{R}^d$.
 \end{itemize}
 
 
 \subsection{Open and closed sets}
-Later on, we are going to think of $M = \symbb{R}^d$ as the points of spacetime, and we will ask
-ourselves what topology should the physical spacetime carry.
+Later on, we are going to think of $M = \symbb{R}^d$ as the points of spacetime, and we
+will ask ourselves what topology should the physical spacetime carry.
 
-Remember that we define topology in order to talk about continuity of maps, so please, do not
-be deterred if you find that this is a little abstract. It is necessary to make explicit some
-notions that we may take for granted.
+Remember that we define topology in order to talk about continuity of maps, so please,
+do not be deterred if you find that this is a little abstract. It is necessary to make
+explicit some notions that we may take for granted.
 
-When Einstein wrote down General Relativity, he didn't understand many explicit assumptions, and
-it took him many years to overcome intuitive notions (some would say obvious notions) that
-nevertheless didn't apply, making implicit things explicit to really understand the concepts
-needed for General Relativity.
+When Einstein wrote down General Relativity, he didn't understand many explicit
+assumptions, and it took him many years to overcome intuitive notions (some would say
+obvious notions) that nevertheless didn't apply, making implicit things explicit to
+really understand the concepts needed for General Relativity.
 
 \subsubsection{Some terminology}
-We talk aobut $M$ being a set, meaning a \emph{collection} of \emph{elements}. But for really
-understand these concepts we need to postulate some axioms, although in this text we are not going
-that far, and we will be satisfied with the intuitive meaning.
+We talk aobut $M$ being a set, meaning a \emph{collection} of \emph{elements}. But for
+really understand these concepts we need to postulate some axioms, although in this text
+we are not going that far, and we will be satisfied with the intuitive meaning.
 
 \begin{itemize}
   \item $M$ is some set that we need to study.
-  \item $\symcal{O}$ is a topology, which is some set of subsets of $M$. These subsets are also called
-    \emph{open sets}. So a topology $\symcal{O}$ is a set of open sets. Note that the term \emph{open}
-    is defined only by choosing a certain topology (if we would choose a different topology, the
-    open sets would be different).
-  \item The pair $(M, \symcal{O})$ is called a \emph{topological space}. It is more than a set. It
-    is a set with more information about it.
-  \item If $U$ is a subset of $M$ that lies in $\symcal{O}$, $U\in\symcal{O}$, then we call
-    $U$ an \emph{open set}.
-  \item If $A$ is as subset of $M$, it is called a \emph{closed set} if the complement of $A$
-    lies on the topology
+  \item $\symcal{O}$ is a topology, which is some set of subsets of $M$. These subsets
+    are also called
+    \emph{open sets}. So a topology $\symcal{O}$ is a set of open sets. Note that the
+    term \emph{open} is defined only by choosing a certain topology (if we would choose
+    a different topology, the open sets would be different).
+  \item The pair $(M, \symcal{O})$ is called a \emph{topological space}. It is more than
+    a set. It is a set with more information about it.
+  \item If $U$ is a subset of $M$ that lies in $\symcal{O}$, $U\in\symcal{O}$, then we
+    call $U$ an \emph{open set}.
+  \item If $A$ is as subset of $M$, it is called a \emph{closed set} if the complement
+    of $A$ lies on the topology
     \[
       A\subseteq M \text{ is a closed set} \iff  M\setminus A\in\symcal{O}
     \]
   \item The \emph{open/closed} terminology is somewhat deceptive:
     Some would say that \emph{open is the opposite of closed in some way}.
 
-    Well no, not in any way.
-    There are open sets that are closed at the same time (think of the empty set $\emptyset$).
+    Well no, not in any way. There are open sets that are closed at the same time
+    (think of the empty set $\emptyset$).
     There are sets that are open, but not closed (see figure~\ref{fig:topspac-openset}).
     There are sets that are closed, but not open (Set on the right of
     figure~\ref{fig:topspac-softball-closedball}).
     And there are sets that are not open and not closed (look at the set pictured in
     figure~\ref{fig:topspac-nonopen-nonclosed-set}).
 
-    But of course, when we choose a certain topology these two terms \emph{open} and \emph{closed} are
+    But of course, when we choose a certain topology these two terms \emph{open} and
+    \emph{closed} are
     connected in this way
     \begin{align*}
       & \text{If } U\in\symcal{O}
@@ -717,16 +741,16 @@ that far, and we will be satisfied with the intuitive meaning.
   \]
 
   In figure~\ref{fig:topspac-map-example} we picture two sets $M=\set{a, b, c, d}$ and
-  $N=\set{i, j, k, l, m}$ by the collection of their elements (as points), and consider an arbitrary map
-  $f$ which takes every point in the domain to some point in the target.
+  $N=\set{i, j, k, l, m}$ by the collection of their elements (as points), and consider
+  an arbitrary map $f$ which takes every point in the domain to some point in the target.
   
-  If every point in the target set is the image of one element at most, then the map is said to be
-  \emph{injective} or \emph{one to one}. In our example we can see that the target point $i$ is being hit
-  twice, so this map is \emph{non-injective}.
+  If every point in the target set is the image of one element at most, then the map is
+  said to be \emph{injective} or \emph{one to one}. In our example we can see that the
+  target point $i$ is being hit twice, so this map is \emph{non-injective}.
 
-  If every point in the target is the image of one or more elements in the
-  domain, the map is called \emph{surjective}. But there is no need that every point is hit,
-  in our example, points $j$ and $l$ are not hit, so the map is \emph{non-surjective}.
+  If every point in the target is the image of one or more elements in the domain, the
+  map is called \emph{surjective}. But there is no need that every point is hit, in our
+  example, points $j$ and $l$ are not hit, so the map is \emph{non-surjective}.
 
   A map is called \emph{bijective} if it is injective and surjective.
   \begin{figure}[ht]
@@ -878,8 +902,9 @@ that far, and we will be satisfied with the intuitive meaning.
   \end{figure}
 
   \subsection{Concept of preimage}
-  Given a certain map $f:M\longrightarrow N$, the \emph{preimage} of some subset of the target $V\subseteq N$
-  with respect to $f$ is the set of elements of the domain whose image is $V$
+  Given a certain map $f:M\longrightarrow N$, the \emph{preimage} of some subset of the
+  target $V\subseteq N$ with respect to $f$ is the set of elements of the domain whose
+  image is $V$
   \[
     \text{preim}_f\,(V) \coloneq \set{m\in M | f(m)\in V}
   \]
@@ -892,8 +917,9 @@ that far, and we will be satisfied with the intuitive meaning.
   \end{array}
   \]
   
-  In figure~\ref{fig:topspac-preimagefV} we can see the preimage with respect to $f$ of the set of the set
-  $V\in N$, $V \coloneq \set{i}$, which is $\text{preim}_f\,(V) \coloneq \set{a, b}$ in our example.
+  In figure~\ref{fig:topspac-preimagefV} we can see the preimage with respect to $f$ of
+  the set of the set $V\in N$, $V \coloneq \set{i}$, which is $\text{preim}_f\,(V)
+  \coloneq \set{a, b}$ in our example.
   \begin{figure}[ht]
     \def\scl{1}
     % 
@@ -1067,32 +1093,34 @@ that far, and we will be satisfied with the intuitive meaning.
         \node [background, fit= (backleft) (backright) (backbottom) (backtop)] {};
       \end{scope}
     \end{tikzpicture}
-    \caption{The preimage of $V\in N$ with respect of map $f:M\rightarrow N$ is the set marked
-      as $U\in M$ in the domain.}
+    \caption{The preimage of $V\in N$ with respect of map $f:M\rightarrow N$ is the set
+      marked as $U\in M$ in the domain.}
     \label{fig:topspac-preimagefV}
   \end{figure}
 
   You may say: The preimage is kind of an inverse $f^{-1}$!
-  Well, careful, because if $f$ is not bijective, then $f^{-1}$ does not exist as a map. Look at
-  figure~\ref{fig:topspac-preimagefV}. There, $f$ is not bijective, so the element $i$ would have
-  to images, $a$ and $b$, $f^{-1}(i) = \set{a, b}$, but in a map an element cannot have two images.
+  Well, careful, because if $f$ is not bijective, then $f^{-1}$ does not exist as a
+  map. Look at figure~\ref{fig:topspac-preimagefV}. There, $f$ is not bijective, so the
+  element $i$ would have to images, $a$ and $b$, $f^{-1}(i) = \set{a, b}$, but in a map
+  an element cannot have two images.
   If this weren't enough, the element $m\in N$ does not have an image $f^{-1}$ in $M$.
   Only, if $f$ is bijective we can write $\text{preim}_f\,(V) = f^{-1}(V)$.
-  The point is that although $f^{-1}$ is not a map, there exists a preimage of every set of $N$ in
-  $M$.
+  The point is that although $f^{-1}$ is not a map, there exists a preimage of every
+  set of $N$ in $M$.
   
   \subsection{Continuous maps}
-  A map is only defined by two sets. We need no further structure on a set to define what a map is.
+  A map is only defined by two sets. We need no further structure on a set to define
+  what a map is.
   But we now ask ourselves if some arbitrary map, like the one in
   figure~\ref{fig:topspac-map-example} is continuous. The answer is ``it depends''.
 
   The answer to the question of whether a map
   \[f: M\longrightarrow N\]
-  is continuous, depends ---by definition--- on which topologies are chosen on the domain $M$ and
-  on the target space $N$.
+  is continuous, depends ---by definition--- on which topologies are chosen on the
+  domain $M$ and on the target space $N$.
 
-  So in order to decide continuity of a map, you need to decide a topology for the domain and
-  another topology for the target.
+  So in order to decide continuity of a map, you need to decide a topology for the
+  domain and another topology for the target.
 
   \subsubsection{Definition}
   Let $(M,\symcal{O}_M)$ and $(N,\symcal{O}_N)$ be two topological spaces.
@@ -1100,8 +1128,8 @@ that far, and we will be satisfied with the intuitive meaning.
   %\[
   %  f:M\longrightarrow N
   %\]
-  is continuous ---with respect to the topologies $\symcal{O}_M$ and $\symcal{O}_N$--- if for every
-  set open set $V$ in the target\footnotemark{} ($V\in\symcal{O}_N$) then,
+  is continuous ---with respect to the topologies $\symcal{O}_M$ and $\symcal{O}_N$---
+  if for every set open set $V$ in the target\footnotemark{} ($V\in\symcal{O}_N$) then,
   \footnotetext{We must check for every open set in the target.}
   the preimage with respect to $f$ of this chosen set is an open set in the domain
   \[
@@ -1109,25 +1137,26 @@ that far, and we will be satisfied with the intuitive meaning.
   \]
   and that's it, no epsilons, no deltas, it's very simple.
 
-  If the map was bijective (\emph{one-to-one}), then it is invertible, and the preimage could
-  have been written as the inverse of the map. And if the map was continuous in both directions,
-  then not only the preimages of open sets are open, but also the images of open sets are open
-  because the preimage of the inverse is the image of the map.
+  If the map was bijective (\emph{one-to-one}), then it is invertible, and the preimage
+  could have been written as the inverse of the map. And if the map was continuous in
+  both directions,
+  then not only the preimages of open sets are open, but also the images of open sets
+  are open because the preimage of the inverse is the image of the map.
 
-  In the map of figure~\ref{fig:topspac-map-example} map, the preimage of element $j$\/ is the
-  empty set $\emptyset$, and the empty set is always an element of a topology. So if $j$\/ is an
-  open set in $N$, then it doesn't destroy the notion of continuity of this map (of course, we must
-  also check for every other sets in the topology).
+  In the map of figure~\ref{fig:topspac-map-example} map, the preimage of element $j$\/
+  is the empty set $\emptyset$, and the empty set is always an element of a topology.
+  So if $j$\/ is an open set in $N$, then it doesn't destroy the notion of continuity of
+  this map (of course, we must also check for every other sets in the topology).
 
-  If maps were bijective and continuous in both directions, the topologica structure is preserved
-  and they have a specific name called homeomorphisms and they are structure preserving maps of
-  topology. Mathematicians always clasify structures by identifying in them if certain structure
-  preserving maps in them exist.
+  If maps were bijective and continuous in both directions, the topologica structure is
+  preserved and they have a specific name called homeomorphisms and they are structure
+  preserving maps of topology. Mathematicians always clasify structures by identifying
+  in them if certain structure preserving maps in them exist.
 
   I would like to give a mnemonic phrase to remember this definition:
   \begin{quote}
-  ``A map is continuous if and only if the preimages of all open sets (in the target space) are open sets
-  (in the domain).''
+    ``A map is continuous if and only if the preimages of all open sets (in the target
+    space) are open sets (in the domain).''
   \end{quote}
  
   \subsubsection{First example}
@@ -1138,8 +1167,8 @@ that far, and we will be satisfied with the intuitive meaning.
     N = \set{1,2}
   \]
 
-  Now we invent a very simple map $f:M\longrightarrow N$. Just for fun, we map the $1$ to the $2$ and the
-  $2$ to the $1$, as represented in figure~\ref{fig:topspac-simple-map-one}
+  Now we invent a very simple map $f:M\longrightarrow N$. Just for fun, we map the $1$
+  to the $2$ and the $2$ to the $1$, as represented in  figure~\ref{fig:topspac-simple-map-one}
   \begin{figure}[ht]
     \def\scl{1}
     %
@@ -1269,23 +1298,25 @@ that far, and we will be satisfied with the intuitive meaning.
         \node [background, fit= (backleft) (backright) (backbottom) (backtop)] {};
       \end{scope}
     \end{tikzpicture}
-    \caption{A very simple example map $f:M\longrightarrow N$ to discuss map continuity.}
+    \caption{A very simple example map $f:M\longrightarrow N$ to discuss map
+      continuity.}
     \label{fig:topspac-simple-map-one}
   \end{figure}
 
   We choose some topologies for each map\footnotemark{}
-  \footnotetext{Note that, although the sets are the same, we are free choose a different topology
-    for each one.}
+  \footnotetext{Note that, although the sets are the same, we are free choose a
+    different topology for each one.}
   \begin{align*}
-    &\text{Domain: } \symcal{O}_M \coloneq \Set{\emptyset, \set{1}, \set{2}, \set{1, 2}}\\
+    &\text{Domain: } \symcal{O}_M \coloneq \Set{\emptyset, \set{1}, \set{2},
+      \set{1, 2}}\\
     &\text{Target:}\hspace{1em} \symcal{O}_N \coloneq \Set{\emptyset, \set{1, 2}}
   \end{align*}
   
   Now we would like to check whether the map $f$ is continuous ---not all by itself,
   but with respect to the chosen topologies---.
 
-  We must check that for every open subset of $N$, its preimage with respect to $f$ is an open set
-  in $M$. It's easy in this example:
+  We must check that for every open subset of $N$, its preimage with respect to $f$ is
+  an open set in $M$. It's easy in this example:
   \begin{itemize}
   \item The empty set is an open subset in the target $N$, $\emptyset\in\symcal{O}_N$.
     Its preimage is the empty set in the domain $M$, which is also an open subset
@@ -1293,7 +1324,8 @@ that far, and we will be satisfied with the intuitive meaning.
       \text{preim}_f\,(\emptyset) = \emptyset \in \symcal{O}_M 
     \]
     
-  \item The whole $N=\set{1,2}$ is the other open set in the target $N$, $\set{1,2}\in\symcal{O}_N$,
+  \item The whole $N=\set{1,2}$ is the other open set in the target $N$,
+    $\set{1,2}\in\symcal{O}_N$,
     and its preimage is $M=\set{1,2}$, which is an open set in $M$.
     \[
       \text{preim}_f\,(\set{1,2}) = \set{1,2} \in \symcal{O}_M
@@ -1302,8 +1334,8 @@ that far, and we will be satisfied with the intuitive meaning.
   Thus we conclude that $f$ is continuous.
   
   \subsubsection{Second example}
-  The map in the first example was bijective, so we can talk about its inverse $f^{-1}$, and we
-  keep the same topologies for the sets
+  The map in the first example was bijective, so we can talk about its inverse
+  $f^{-1}$, and we keep the same topologies for the sets
     \begin{figure}[ht]
     \def\scl{1}
     % 
@@ -1433,31 +1465,35 @@ that far, and we will be satisfied with the intuitive meaning.
         \node [background, fit= (backleft) (backright) (backbottom) (backtop)] {};
       \end{scope}
     \end{tikzpicture}
-    \caption{The inverse of the map in example one, $f^{-1}:N\longrightarrow B$ to discuss
-      map continuity.}
+    \caption{The inverse of the map in example one, $f^{-1}:N\longrightarrow B$ to
+      discuss map continuity.}
     \label{fig:topspac-simple-map-two}
   \end{figure}
 
   We keep the same topologies as before
   \begin{align*}
     \text{Domain: } \symcal{O}_N &\coloneq \Set{\emptyset, \set{1, 2}}\\
-    \text{Target:}\hspace{1em} \symcal{O}_M &\coloneq \Set{\emptyset, \set{1}, \set{2}, \set{1, 2}}
+    \text{Target:}\hspace{1em} \symcal{O}_M &\coloneq \Set{\emptyset, \set{1}, \set{2},
+                                              \set{1, 2}}
   \end{align*}
 
-  As always, we must check if the preimage of all open subsets in the target is an open set in the
-  domain. We start with the open subset $\set{1}\in\symcal{O}_M$ in the target. Its preimage is the
-  subset set $\set{2}$ in the domain. But this subset is not an open set in the domain,
-  $\set{2}\notin\symcal{O}_N$. So we conclude that $f^{-1}$ is not continuous\footnotemark{}.
+  As always, we must check if the preimage of all open subsets in the target is an open
+  set in the domain. We start with the open subset $\set{1}\in\symcal{O}_M$ in the
+  target. Its preimage is the subset set $\set{2}$ in the domain. But this subset is
+  not an open set in the domain,
+  $\set{2}\notin\symcal{O}_N$. So we conclude that $f^{-1}$ is not
+  continuous\footnotemark{}.
   \footnotetext{Although $f$ itself was continuous with the same topological spaces,
     $(M,\symcal{O}_M)$ and $(N,\symcal{O}_N)$.}
   \[
     \text{preim}_{f^{-1}}\,(\set{1}) = \set{2} \notin \symcal{O}_M
   \]
 
-  In particular, if $1$ was mapped to $1$ and $2$ was mapped to $2$, then $f$ would be the identity
-  map as $f^{-1}$, but the identity $f$ would be continuous while the identity $f^{-1}$ would
-  not\footnotemark{}.
-  \footnotetext{As you may guess, it all depends on the topologies associated to the sets.
+  In particular, if $1$ was mapped to $1$ and $2$ was mapped to $2$, then $f$ would be
+  the identity map as $f^{-1}$, but the identity $f$ would be continuous while the
+  identity $f^{-1}$ would not\footnotemark{}.
+  \footnotetext{%
+    As you may guess, it all depends on the topologies associated to the sets.
     You see how dangerous it is to not explicitly talk about the topologies.}
 
   \begin{quote}
@@ -1466,9 +1502,9 @@ that far, and we will be satisfied with the intuitive meaning.
   \end{quote}
 
   Although the next thing we are going to talk is not about continuity, let us remember
-  something about open an closed sets. In particular we are going to recall that an open subset
-  may be also closed. Look at subset $\set{2}$ in $M$. This subset is in the topology
-  $\symcal{O}_M$, so it is an open subset
+  something about open an closed sets. In particular we are going to recall that an
+  open subset may be also closed. Look at subset $\set{2}$ in $M$. This subset is in
+  the topology $\symcal{O}_M$, so it is an open subset
   \[
     \set{2}\in\symcal{O}_M
     \Longrightarrow \set{2}
@@ -1483,36 +1519,38 @@ that far, and we will be satisfied with the intuitive meaning.
     \set{2} \text{is an closed subset in } M
   \]
 
-  Also, remember that being open or closed has nothing to do with the image of the boundary being
-  there or not. We can define the boundary for every topology, so these notions carry over, but
-  our images of the boundary, as in figure~\ref{fig:topspac-softball-closedball} not necessarily
-  do.
+  Also, remember that being open or closed has nothing to do with the image of the
+  boundary being there or not. We can define the boundary for every topology, so these
+  notions carry over, but our images of the boundary, as in figure~\ref{fig:topspac-softball-closedball} not necessarily do.
 
-  So we have introduced the notion of continuity for general maps between any two topological
-  spaces. In the beginning we drew this curve in figure~\ref{fig:topspac-nojumps} in a set
-  that makes a jump all of a sudden in order to picture a non-discontinuity. Well the curve could
-  go from the real line into some other set wich may be another real line, but we need to equip
-  these two sets with a topology, which may be the same or different. So in order to start
-  talking about continuity we must establish the two topological spaces first.
+  So we have introduced the notion of continuity for general maps between any two
+  topological spaces. In the beginning we drew this curve in   figure~\ref{fig:topspac-nojumps} in a set that makes a jump all of a sudden in order to
+  picture a non-discontinuity. Well the curve could go from the real line into some
+  other set wich may be another real line, but we need to equip these two sets with a
+  topology, which may be the same or different. So in order to start talking about
+  continuity we must establish the two topological spaces first.
 
-  In the rest of these lectures, every time we have a topological space involving the real
-  numbers as $\symbb{R}, \symbb{R}^2 \cdots \symbb{R}^d$, and nothing else is said,
-  \emph{we assume they carry the standard topology}: the standard topology on the real line,
-  the standard topology on the real plane, \dots
-  But in the other spaces we will have, in particular, spacetime will not be $\symbb{R}^3$,
-  nor $\symbb{R}^4$, or something like that. Spacetime is a topological space all by itself.
+  In the rest of these lectures, every time we have a topological space involving the
+  real numbers as $\symbb{R}, \symbb{R}^2 \cdots \symbb{R}^d$, and nothing else is said,
+  \emph{we assume they carry the standard topology}: the standard topology on the real
+  line, the standard topology on the real plane, \dots
+  But in the other spaces we will have, in particular, spacetime will not be
+  $\symbb{R}^3$, nor $\symbb{R}^4$, or something like that. Spacetime is a topological
+  space all by itself.
 
   \subsection{Composition of continuous maps}
-  Composition of maps is defined at the set level ---we don't need to define a topology on
-  the sets in order to define map composition---.
-  But now we are interested in the composition of continuous maps ---so we need to define a
-  topology on the sets in order to talk about continuity---. We want to know whether the
-  composition of two continuous maps is continuous or not.
+  Composition of maps is defined at the set level ---we don't need to define a topology
+  on the sets in order to define map composition---.
+  But now we are interested in the composition of continuous maps ---so we need to
+  define a topology on the sets in order to talk about continuity---. We want to know
+  whether the composition of two continuous maps is continuous or not.
 
   Let's have a map $f$ which goes from $M$ to $N$ and another map $g$ which goes from
   $N$ go $P$
   \[
-    M \xrightarrow{\hspace{4pt}f\hspace{4pt}} N \xrightarrow{\hspace{5pt}g\hspace{5pt}} P
+    M
+    \xrightarrow{\hspace{4pt}f\hspace{4pt}} N \xrightarrow{\hspace{5pt}g\hspace{5pt}}
+    P
   \]
 
   We can define a new map $g\circ f$ ($g$ after $f$) which is a map from $M$ to $P$
@@ -1559,14 +1597,14 @@ that far, and we will be satisfied with the intuitive meaning.
   %an open set in $M$. And that is what we wanted to prove.
 
   \subsection{Inheriting a topology}
-  In this section we are interested in constructing a new topological space from other or others
-  that we've already got.
+  In this section we are interested in constructing a new topological space from other
+  or others that we've already got.
   There are many useful ways to inherit a topology from some given topological space
   ---or spaces---.
 
   For spacetime physics it is important the following:
-  Assume we have the set $M$, on which we are happy enough to already be given a topology
-  $\symcal{O}_M$. So we already have a topological space.
+  Assume we have the set $M$, on which we are happy enough to already be given a
+  topology $\symcal{O}_M$. So we already have a topological space.
   Now we consider a subset $S$ of this topological space $(M,\symcal{O}_M)$, where $S$
   \emph{is any subset of} $M$, not necessarily an open subset
   %\vspace{-.5ex}
@@ -1590,32 +1628,34 @@ that far, and we will be satisfied with the intuitive meaning.
   \end{tikzpicture}
  \end{center}
  Question: Can we make on $S$ a topology from the topology $\symcal{O}_M$ on $M$?
- Yes, we can always invent a topology on $S$, but maybe we want a special topology that in some way
- inherits from $\symcal{O}_M$ ---we'll see soon enough why this is interesting---.
+ Yes, we can always invent a topology on $S$, but maybe we want a special topology that
+ in some way inherits from $\symcal{O}_M$ ---we'll see soon enough why this is
+ interesting---.
 
  \subsubsection{Definition of subset topology}
- We define a topology $\symcal{O}|_S \subseteq \symcal{P} (S)$, called \emph{subset topology}
- (inherited from the topology on the superset $M$).
- Every element of $\symcal{O}|_S$ must be writeable as $U\cap S$, where $U$ is any set in the
- given topology $\symcal{O}_M$
+ We define a topology $\symcal{O}|_S \subseteq \symcal{P} (S)$, called
+ \emph{subset topology} (inherited from the topology on the superset $M$).
+ Every element of $\symcal{O}|_S$ must be writeable as $U\cap S$, where $U$ is any set
+ in the given topology $\symcal{O}_M$
  \[
    \symcal{O}|_S \coloneq \set{U\cap S | U\in\symcal{O}_M}
  \]
  
- We claim that $\symcal{O}|_S$ is a topology. To prove that, we need to check the axioms for
- a topology:
+ We claim that $\symcal{O}|_S$ is a topology. To prove that, we need to check the
+ axioms for a topology:
  \begin{enumerate}
- \item \emph{The empty set $\emptyset$ and the whole set$S$ must be part of $\symcal{O}|_S$\,:}
+ \item \emph{The empty set $\emptyset$ and the whole set$S$ must be part of
+     $\symcal{O}|_S$\,:}
    \begin{itemize}
-   \item The empty set is an element of the given topology $\emptyset\in\symcal{O}_M$, so
-     the intersection of the empty set with $S$ is the empty set, which is also an element
-     of $\symcal{O}|_S$
+   \item The empty set is an element of the given topology $\emptyset\in\symcal{O}_M$,
+     so the intersection of the empty set with $S$ is the empty set, which is also an
+     element of $\symcal{O}|_S$
    \[
      \emptyset = \emptyset\cap S \in \symcal{O}|_S
    \]
 
- \item The whole set $S$ needs to be part of $\symcal{O}|_s$. We know that $M$ is an element
-   of $\symcal{O}_M$, so this is also true
+ \item The whole set $S$ needs to be part of $\symcal{O}|_s$. We know that $M$ is an
+   element of $\symcal{O}_M$, so this is also true
    \[
      S = M\cap S \in \symcal{O}|_S
    \]
@@ -1638,7 +1678,8 @@ that far, and we will be satisfied with the intuitive meaning.
    \]
    because
    \[
-     \symcal{O}_M \text{ is a topology } \Longrightarrow \tilde{A}\cap\tilde{B}\in \symcal{O}_M
+     \symcal{O}_M \text{ is a topology } \Longrightarrow \tilde{A}\cap\tilde{B}\in
+     \symcal{O}_M
    \]
 
  \item \emph{Given a finite or infinite number of elements in} $\symcal{O}|_S$,
@@ -1649,9 +1690,10 @@ that far, and we will be satisfied with the intuitive meaning.
      \bigcup_{\alpha\in A} U_\alpha \in \symcal{O}|_S
    \end{equation}
 
-   Let's take a number ---finite or infinite--- of elements of $U_\alpha\in\symcal{O}|_S$.
+   Let's take a number ---finite or infinite--- of elements of
+   $U_\alpha\in\symcal{O}|_S$.
    There must be a number of elements $\tilde{U}_\alpha\in\symcal{O}_M$ such that
-   $U_\alpha = \tilde{U}_\alpha \cap S$
+   $U_\alpha = \tilde{U}_\alpha \cap S$.
    Now
    \[
      \bigcup_\alpha U_\alpha
@@ -1692,10 +1734,13 @@ that far, and we will be satisfied with the intuitive meaning.
 
  We'd like to know what happens when we change $M$ with a certain subset of $M$, say
  ($S\subseteq M$) as the domain, keeping the same target space $N$ and its topology
- $\symcal{O}_N$, This new map $f|_S$ is called \emph{restriction of $f$ only to the subset $S$}.
- Then, if we decide to equip $S$ with an arbitrary topology, we wouldn't know beforehand if it
+ $\symcal{O}_N$, This new map $f|_S$ is called \emph{restriction of $f$ only to the
+   subset $S$}.
+ Then, if we decide to equip $S$ with an arbitrary topology, we wouldn't know
+ beforehand if it
  is continuous or not, because it depends on the chosen topology.
- But if we choose the subset topology $\symcal{O}|_S$ in the domain, then we are guaranteed that
+ But if we choose the subset topology $\symcal{O}|_S$ in the domain, then we are
+ guaranteed that
  the restriction map $f|_S : S \longrightarrow N$ is continuous.
  \vspace{-1.0ex}
  \begin{center}
@@ -1724,23 +1769,25 @@ that far, and we will be satisfied with the intuitive meaning.
    \end{center}
    and we'd like to do this very often.
 
-   As a simple example, imagine we have a plane (hot plate). Every point of it has a certain
-   temperature.   This temperature field is a map from a subset of $\symbb{R}^2$ into $\symbb{R}$.
+   As a simple example, imagine we have a plane (hot plate). Every point of it has a
+   certain temperature.   This temperature field is a map from a subset of
+   $\symbb{R}^2$ into $\symbb{R}$.
    \[
      f : \symbb{R}^2 \longrightarrow \symbb{R}
    \]
 
-   We know that this map is continuous. But imagine that some mouse runs across the plate along
-   some trajectory. The mouse is only interested in the temperature on the line (a subset $S$ of
-   the points in the plane). Now we have a restriction of $f$ only to the subset $S$, $f|_S$.
+   We know that this map is continuous. But imagine that some mouse runs across the
+   plate along some trajectory. The mouse is only interested in the temperature on the
+   line (a subset $S$ of the points in the plane). Now we have a restriction of $f$
+   only to the subset $S$, $f|_S$.
    \[
      f|_S : S\subseteq\symbb{R}^2 \longrightarrow \symbb{R}
    \]
 
-   If we keep the topology on the target, then the subset topology $\symcal{O}|_S$ guarantees
-   that the new map is also continuous.
+   If we keep the topology on the target, then the subset topology $\symcal{O}|_S$
+   guarantees that the new map is also continuous.
    
- 
+
  
 
 %janr - 1:17:00
