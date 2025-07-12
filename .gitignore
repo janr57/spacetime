@@ -2,22 +2,22 @@
 *.aux
 *.log
 *.toc
-*.pdf
 *~
 
 ## Documents:
+spacetime.pdf
 *.pdf
 
 ## 'auto' folder when using emacs and auctex
-./auto/*
+auto/*
 *.el
 
-./apariencia/*.aux
-./apariencia/*~
-./apariencia/auto/*
+appearance/*.aux
+appearance/*~
+appearance/auto/*
 
-./text/*.aux
-./text/*.log
-./text/*~
-./text/auto/*
+text/*.aux
+text/*.log
+text/*~
+text/auto/*
 

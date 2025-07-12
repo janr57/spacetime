@@ -6,7 +6,7 @@ FILES = spacetime.pkg.sty\
 	appearance/st-frontpage.tex\
 	appearance/st-tableofcontents.tex\
 	prologue/st-prologue.tex\
-	text/st-topologicalspaces.tex\
+	text/topologicalspaces.tex\
 	text/st-manifolds.tex\
 	text/st-multilinearalgebra.tex
 
