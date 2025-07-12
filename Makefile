@@ -3,12 +3,12 @@
 
 FILES = spacetime.pkg.sty\
 	spacetime.defs.sty\
-	appearance/st-frontpage.tex\
-	appearance/st-tableofcontents.tex\
-	prologue/st-prologue.tex\
+	appearance/frontpage.tex\
+	appearance/tableofcontents.tex\
+	prologue/prologue.tex\
 	text/topologicalspaces.tex\
-	text/st-manifolds.tex\
-	text/st-multilinearalgebra.tex
+	text/manifolds.tex\
+	text/multilinearalgebra.tex
 
 spacetime.pdf: spacetime.tex $(FILES)
 
