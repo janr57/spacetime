@@ -971,12 +971,20 @@ far, and we will be satisfied with the intuitive meaning.
   \]
 
   Where
-  \[
-  \begin{array}{cccc}
-    f:& M & \longrightarrow & N\\
-      & m & \mapsto     & f(m)
-  \end{array}
-  \]
+  \begin{center}
+    \begin{tikzpicture}[%
+      baseline,
+      fila2/.style={black!95,font=\small},
+      ]
+      \matrix (mymatrix)[row sep=-3pt, column sep=-2pt]
+      {
+        \node{$f$\,:}; & \node{$M$}; & \node{$\longrightarrow$}; &
+        [-3pt]\node{N};\\
+        & \node[fila2]{$m$}; & \node[black!70]{$\mapsto$}; &
+        \node[fila2]{$f(m)$};\\
+      };
+    \end{tikzpicture}
+  \end{center}
   
   In figure~\ref{fig:topspac-preimagefV} we can see the preimage with respect
   to $f$ of the set of the set $V\in N$, $V \coloneq \set{i}$, which is
